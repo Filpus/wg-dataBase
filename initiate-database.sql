@@ -29,3 +29,274 @@ CREATE TABLE RelatedEvents (id SERIAL NOT NULL, fk_Nations int4 NOT NULL, fk_Eve
 CREATE TABLE UsedResources (id SERIAL NOT NULL, fk_SocialGroups int4 NOT NULL, fk_Resources int4 NOT NULL, amount int4 NOT NULL, PRIMARY KEY (id));
 CREATE TABLE ProductionShares (id SERIAL NOT NULL, fk_SocialGroups int4 NOT NULL, fk_Resources int4 NOT NULL, coefficient float4 NOT NULL, PRIMARY KEY (id));
 CREATE TABLE MaintenanceCosts (id SERIAL NOT NULL, fk_UnitTypes int4 NOT NULL, fk_Resources int4 NOT NULL, amount int4 NOT NULL, PRIMARY KEY (id));
+
+-- Foreign keys
+ALTER TABLE Populations 
+ADD CONSTRAINT fk_population_socialgroups 
+FOREIGN KEY (fk_SocialGroups) 
+REFERENCES SocialGroups(id) 
+ON DELETE SET NULL;
+
+ALTER TABLE Populations
+ADD CONSTRAINT fk_population_cultures
+FOREIGN KEY (fk_Cultures)
+REFERENCES Cultures(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Populations
+ADD CONSTRAINT fk_population_religions
+FOREIGN KEY (fk_Religions)
+REFERENCES Religions(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Populations
+ADD CONSTRAINT fk_population_locations
+FOREIGN KEY (fk_Locations)
+REFERENCES Locations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Locations
+ADD CONSTRAINT fk_location_populations
+FOREIGN KEY (fk_Populations)
+REFERENCES Populations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE LocationResources
+ADD CONSTRAINT fk_locationresources_locations
+FOREIGN KEY (fk_Locations)
+REFERENCES Locations(id)
+ON DELETE CASCADE;
+
+ALTER TABLE LocationResources
+ADD CONSTRAINT fk_locationresources_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE Armies
+ADD CONSTRAINT fk_armies_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Armies
+ADD CONSTRAINT fk_armies_locations
+FOREIGN KEY (fk_Locations)
+REFERENCES Locations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Troops
+ADD CONSTRAINT fk_troops_armies
+FOREIGN KEY (fk_Armies)
+REFERENCES Armies(id)
+ON DELETE CASCADE;
+
+ALTER TABLE Troops
+ADD CONSTRAINT fk_troops_unitTypes
+FOREIGN KEY (fk_UnitTypes)
+REFERENCES UnitTypes(id)
+ON DELETE CASCADE;
+
+ALTER TABLE Nations
+ADD CONSTRAINT fk_nations_cultures
+FOREIGN KEY (fk_Cultures)
+REFERENCES Cultures(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Nations
+ADD CONSTRAINT fk_nations_religions
+FOREIGN KEY (fk_Religions)
+REFERENCES Religions(id)
+ON DELETE SET NULL;
+
+ALTER TABLE ProductionCosts
+ADD CONSTRAINT fk_productionCosts_unitTypes
+FOREIGN KEY (fk_UnitTypes)
+REFERENCES UnitTypes(id)
+ON DELETE CASCADE;
+
+ALTER TABLE ProductionCosts
+ADD CONSTRAINT fk_productionCosts_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE OwnedResources
+ADD CONSTRAINT fk_ownedResources_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE OwnedResources
+ADD CONSTRAINT fk_ownedResources_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE TradeAgreements
+ADD CONSTRAINT fk_tradeAgreements_nationOffering
+FOREIGN KEY (fk_NationOffering)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE TradeAgreements
+ADD CONSTRAINT fk_tradeAgreements_nationReceiving
+FOREIGN KEY (fk_NationReceiving)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Modifiers
+ADD CONSTRAINT fk_modifiers_events
+FOREIGN KEY (fk_Events)
+REFERENCES Events(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Modifiers
+ADD CONSTRAINT fk_modifiers_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Modifiers
+ADD CONSTRAINT fk_modifiers_socialGroups
+FOREIGN KEY (fk_SocialGroups)
+REFERENCES SocialGroups(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Modifiers
+ADD CONSTRAINT fk_modifiers_cultures
+FOREIGN KEY (fk_Cultures)
+REFERENCES Cultures(id)
+ON DELETE SET NULL;
+
+ALTER TABLE Modifiers
+ADD CONSTRAINT fk_modifiers_religions
+FOREIGN KEY (fk_Religions)
+REFERENCES Religions(id)
+ON DELETE SET NULL;
+
+ALTER TABLE AccessesToNations
+ADD CONSTRAINT fk_accessesToNations_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE AccessesToNations
+ADD CONSTRAINT fk_accessesToNations_users
+FOREIGN KEY (fk_Users)
+REFERENCES Users(id)
+ON DELETE CASCADE;
+
+ALTER TABLE GrantedPermissions
+ADD CONSTRAINT fk_grantedPermissions_users
+FOREIGN KEY (fk_Users)
+REFERENCES Users(id)
+ON DELETE CASCADE;
+
+ALTER TABLE GrantedPermissions
+ADD CONSTRAINT fk_grantedPermissions_permissions
+FOREIGN KEY (fk_Permissions)
+REFERENCES Permissions(id)
+ON DELETE CASCADE;
+
+ALTER TABLE Actions
+ADD CONSTRAINT fk_actions_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE UnitOrders
+ADD CONSTRAINT fk_unitOrders_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE UnitOrders
+ADD CONSTRAINT fk_unitOrders_unitTypes
+FOREIGN KEY (fk_UnitTypes)
+REFERENCES UnitTypes(id)
+ON DELETE CASCADE;
+
+ALTER TABLE AccessesToUnits
+ADD CONSTRAINT fk_accessesToUnits_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE AccessesToUnits
+ADD CONSTRAINT fk_accessesToUnits_unitTypes
+FOREIGN KEY (fk_UnitTypes)
+REFERENCES UnitTypes(id)
+ON DELETE CASCADE;
+
+ALTER TABLE OfferedResources
+ADD CONSTRAINT fk_offeredResources_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE OfferedResources
+ADD CONSTRAINT fk_offeredResources_tradeAgreements
+FOREIGN KEY (fk_TradeAgreements)
+REFERENCES TradeAgreements(id)
+ON DELETE CASCADE;
+
+ALTER TABLE WantedResources
+ADD CONSTRAINT fk_wantedResources_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE WantedResources
+ADD CONSTRAINT fk_wantedResources_tradeAgreements
+FOREIGN KEY (fk_TradeAgreements)
+REFERENCES TradeAgreements(id)
+ON DELETE CASCADE;
+
+ALTER TABLE RelatedEvents
+ADD CONSTRAINT fk_relatedEvents_nations
+FOREIGN KEY (fk_Nations)
+REFERENCES Nations(id)
+ON DELETE SET NULL;
+
+ALTER TABLE RelatedEvents
+ADD CONSTRAINT fk_relatedEvents_events
+FOREIGN KEY (fk_Events)
+REFERENCES Events(id)
+ON DELETE CASCADE;
+
+ALTER TABLE UsedResources
+ADD CONSTRAINT fk_usedResources_socialGroups
+FOREIGN KEY (fk_SocialGroups)
+REFERENCES SocialGroups(id)
+ON DELETE SET NULL;
+
+ALTER TABLE UsedResources
+ADD CONSTRAINT fk_usedResources_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE ProductionShares
+ADD CONSTRAINT fk_productionShares_socialGroups
+FOREIGN KEY (fk_SocialGroups)
+REFERENCES SocialGroups(id)
+ON DELETE SET NULL;
+
+ALTER TABLE ProductionShares
+ADD CONSTRAINT fk_productionShares_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
+
+ALTER TABLE MaintenanceCosts
+ADD CONSTRAINT fk_maintenanceCosts_unitTypes
+FOREIGN KEY (fk_UnitTypes)
+REFERENCES UnitTypes(id)
+ON DELETE CASCADE;
+
+ALTER TABLE MaintenanceCosts
+ADD CONSTRAINT fk_maintenanceCosts_resources
+FOREIGN KEY (fk_Resources)
+REFERENCES Resources(id)
+ON DELETE CASCADE;
