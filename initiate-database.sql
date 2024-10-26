@@ -2,8 +2,8 @@
 CREATE TABLE Cultures (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (id));
 CREATE TABLE Religions (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (id));
 CREATE TABLE SocialGroups (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, baseSatisfaction float4 DEFAULT 0.5 NOT NULL, volunteers int4 DEFAULT 500 NOT NULL, PRIMARY KEY (id));
-CREATE TABLE Populations (id SERIAL NOT NULL, fk_SocialGroups int4 NOT NULL, fk_Cultures int4 NOT NULL, fk_Religions int4 NOT NULL, fk_Locations int4 NOT NULL, satisfaction float4 NOT NULL, PRIMARY KEY (id));
-CREATE TABLE Locations (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, "size" int4 NOT NULL, fortifications int4 DEFAULT 0 NOT NULL, fk_Populations int4 NOT NULL, PRIMARY KEY (id));
+CREATE TABLE Populations (id SERIAL NOT NULL, fk_SocialGroups int4 NOT NULL, fk_Cultures int4 NOT NULL, fk_Religions int4 NOT NULL, fk_Locations int4, satisfaction float4 NOT NULL, PRIMARY KEY (id));
+CREATE TABLE Locations (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, "size" int4 NOT NULL, fortifications int4 DEFAULT 0 NOT NULL, fk_Populations int4, PRIMARY KEY (id));
 CREATE TABLE LocationResources (id SERIAL NOT NULL, fk_Locations int4 NOT NULL, fk_Resources int4 NOT NULL, amount int4 NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Resources (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, isMain BOOLEAN DEFAULT FALSE NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Armies (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, fk_Nations int4 NOT NULL, fk_Locations int4 NOT NULL, PRIMARY KEY (id));
