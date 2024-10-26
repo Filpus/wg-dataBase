@@ -300,3 +300,64 @@ ADD CONSTRAINT fk_maintenanceCosts_resources
 FOREIGN KEY (fk_Resources)
 REFERENCES Resources(id)
 ON DELETE CASCADE;
+
+-- Check constraints
+ALTER TABLE SocialGroups
+ADD CONSTRAINT base_satisfaction_check
+CHECK (baseSatisfaction >= 0 AND baseSatisfaction <= 1);
+
+ALTER TABLE SocialGroups
+ADD CONSTRAINT volunteers_check
+CHECK (volunteers >= 0);
+
+ALTER TABLE Populations
+ADD CONSTRAINT satisfaction_check
+CHECK (satisfaction >= 0 AND satisfaction <= 1);
+
+ALTER TABLE Locations
+ADD CONSTRAINT size_check
+CHECK ("size" > 0);
+
+ALTER TABLE Locations
+ADD CONSTRAINT fortifications_check
+CHECK (fortifications >= 0);
+
+ALTER TABLE Troops
+ADD CONSTRAINT quantity_check
+CHECK (quantity > 0);
+
+ALTER TABLE ProductionCosts
+ADD CONSTRAINT amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE OwnedResources
+ADD CONSTRAINT owned_resources_amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE LocationResources
+ADD CONSTRAINT location_resources_amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE OfferedResources
+ADD CONSTRAINT offered_resources_amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE WantedResources
+ADD CONSTRAINT wanted_resources_amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE UsedResources
+ADD CONSTRAINT used_resources_amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE MaintenanceCosts
+ADD CONSTRAINT maintenance_costs_amount_check
+CHECK (amount >= 0);
+
+ALTER TABLE UnitOrders
+ADD CONSTRAINT unit_orders_quantity_check
+CHECK (quantity >= 0);
+
+ALTER TABLE ProductionShares
+ADD CONSTRAINT coefficient_check
+CHECK (coefficient >= 0);
