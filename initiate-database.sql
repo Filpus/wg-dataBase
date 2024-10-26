@@ -361,3 +361,20 @@ CHECK (quantity >= 0);
 ALTER TABLE ProductionShares
 ADD CONSTRAINT coefficient_check
 CHECK (coefficient >= 0);
+
+-- UniqueTogether constraints
+ALTER TABLE TradeAgreements
+ADD CONSTRAINT unique_trade_agreement
+UNIQUE (fk_NationOffering, fk_NationReceiving);
+
+ALTER TABLE GrantedPermissions
+ADD CONSTRAINT unique_user_permission
+UNIQUE (fk_Users, fk_Permissions);
+
+ALTER TABLE UnitOrders
+ADD CONSTRAINT unique_nation_unit_order
+UNIQUE (fk_Nations, fk_UnitTypes);
+
+ALTER TABLE OwnedResources
+ADD CONSTRAINT unique_nation_resource_owned
+UNIQUE (fk_Nations, fk_Resources);
