@@ -6,15 +6,15 @@ INSERT INTO Religions (name) VALUES ('Christianity');
 
 INSERT INTO SocialGroups (name, baseSatisfaction, volunteers) VALUES ('Workers', 0.7, 600);
 
-INSERT INTO Locations (name, "size", fortifications, fk_Populations) VALUES ('Capital City', 100, 10, NULL);
+INSERT INTO Resources (name, isMain) VALUES ('Iron', TRUE);
+
+INSERT INTO Nations (name, fk_Cultures, fk_Religions) VALUES ('Nation A', 1, 1);
+
+INSERT INTO Locations (name, "size", fortifications, fk_Nations) VALUES ('Capital City', 100, 10, 1);
 
 INSERT INTO Populations (fk_SocialGroups, fk_Cultures, fk_Religions, fk_Locations, satisfaction) VALUES (1, 1, 1, 1, 0.8);
 
-INSERT INTO Resources (name, isMain) VALUES ('Iron', TRUE);
-
 INSERT INTO LocationResources (fk_Locations, fk_Resources, amount) VALUES (1, 1, 500);
-
-INSERT INTO Nations (name, fk_Cultures, fk_Religions) VALUES ('Nation A', 1, 1);
 
 INSERT INTO Armies (name, fk_Nations, fk_Locations) VALUES ('First Army', 1, 1);
 
@@ -57,5 +57,3 @@ INSERT INTO UsedResources (fk_SocialGroups, fk_Resources, amount) VALUES (1, 1, 
 INSERT INTO ProductionShares (fk_SocialGroups, fk_Resources, coefficient) VALUES (1, 1, 0.5);
 
 INSERT INTO MaintenanceCosts (fk_UnitTypes, fk_Resources, amount) VALUES (1, 1, 20);
--- Update Locations to set fk_Populations after Population is created
-UPDATE Locations SET fk_Populations = 1 WHERE id = 1;
