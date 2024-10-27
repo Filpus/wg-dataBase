@@ -30,7 +30,7 @@ INSERT INTO TradeAgreements (fk_NationOffering, fk_NationReceiving, isAccepted) 
 
 INSERT INTO Events (name, description) VALUES ('Harvest Festival', 'A celebration of the annual harvest.');
 
-INSERT INTO Modifiers (fk_Events, target, fk_Resources, fk_SocialGroups, fk_Cultures, fk_Religions) VALUES (1, 'Zadowolenie', 1, 1, 1, 1);
+INSERT INTO Modifiers (fk_Events, target, fk_Resources, fk_SocialGroups, fk_Cultures, fk_Religions) VALUES (1, 'Happiness', 1, 1, 1, 1);
 
 INSERT INTO Users (name, email, password, isArchived) VALUES ('John Doe', 'john@example.com', 'password123', FALSE);
 

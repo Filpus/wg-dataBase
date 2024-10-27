@@ -1,3 +1,6 @@
+-- Enum definitions
+CREATE TYPE target_enum AS ENUM ('Happiness', 'Production');
+
 -- Table definitions
 CREATE TABLE Cultures (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (id));
 
@@ -46,7 +49,8 @@ CREATE TABLE TradeAgreements (id SERIAL NOT NULL, fk_NationOffering int4 NOT NUL
 CREATE TABLE Events (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255), PRIMARY KEY (id));
 
 CREATE TABLE Modifiers (id SERIAL NOT NULL, fk_Events int4 NOT NULL, target VARCHAR(255) NOT NULL, fk_Resources int4, fk_SocialGroups int4, fk_Cultures int4, fk_Religions int4, PRIMARY KEY (id));
-COMMENT ON COLUMN Modifiers.target IS 'Enum {Zadowolenie,Produkcja}';
+ALTER TABLE Modifiers
+ALTER COLUMN target TYPE target_enum USING target::target_enum;
 
 CREATE TABLE Users (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, isArchived BOOLEAN NOT NULL, PRIMARY KEY (id));
 
