@@ -362,10 +362,6 @@ REFERENCES Resources(id)
 ON DELETE CASCADE;
 
 -- UniqueTogether constraints
-ALTER TABLE TradeAgreements
-ADD CONSTRAINT unique_trade_agreement
-UNIQUE (fk_NationOffering, fk_NationReceiving);
-
 ALTER TABLE GrantedPermissions
 ADD CONSTRAINT unique_user_permission
 UNIQUE (fk_Users, fk_Permissions);
@@ -377,3 +373,5 @@ UNIQUE (fk_Nations, fk_UnitTypes);
 ALTER TABLE OwnedResources
 ADD CONSTRAINT unique_nation_resource_owned
 UNIQUE (fk_Nations, fk_Resources);
+
+-- UserResources, productionshares, maintaincost, productioncost, locationresources, relatedevents
