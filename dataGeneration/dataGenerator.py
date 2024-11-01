@@ -1,0 +1,1 @@
+#script running all other generation scripts
