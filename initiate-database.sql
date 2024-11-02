@@ -375,3 +375,35 @@ UNIQUE (fk_Nations, fk_UnitTypes);
 ALTER TABLE OwnedResources
 ADD CONSTRAINT unique_nation_resource_owned
 UNIQUE (fk_Nations, fk_Resources);
+
+ALTER TABLE UsedResources
+ADD CONSTRAINT unique_social_group_resource_used
+UNIQUE (fk_SocialGroups, fk_Resources);
+
+ALTER TABLE UsedResources
+ADD CONSTRAINT unique_social_group_resource_used
+UNIQUE (fk_SocialGroups, fk_Resources);
+
+ALTER TABLE ProductionShares
+ADD CONSTRAINT unique_social_group_resource_share
+UNIQUE (fk_SocialGroups, fk_Resources);
+
+ALTER TABLE MaintenanceCosts
+ADD CONSTRAINT unique_unit_type_resource_maintenance
+UNIQUE (fk_UnitTypes, fk_Resources);
+
+ALTER TABLE ProductionCosts
+ADD CONSTRAINT unique_unit_type_resource_production
+UNIQUE (fk_UnitTypes, fk_Resources);
+
+ALTER TABLE LocationResources
+ADD CONSTRAINT unique_location_resource
+UNIQUE (fk_Locations, fk_Resources);
+
+ALTER TABLE RelatedEvents
+ADD CONSTRAINT unique_nation_event
+UNIQUE (fk_Nations, fk_Events);
+
+ALTER TABLE AccessesToUnits
+ADD CONSTRAINT unique_nation_unit_access
+UNIQUE (fk_Nations, fk_UnitTypes);
