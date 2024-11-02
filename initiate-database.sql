@@ -6,14 +6,14 @@ CREATE TABLE Cultures (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, PR
 
 CREATE TABLE Religions (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (id));
 
-CREATE TABLE SocialGroups (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, baseSatisfaction float4 DEFAULT 0.5 NOT NULL, volunteers int4 DEFAULT 500 NOT NULL, PRIMARY KEY (id));
+CREATE TABLE SocialGroups (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, baseHappiness float4 DEFAULT 0.5 NOT NULL, volunteers int4 DEFAULT 500 NOT NULL, PRIMARY KEY (id));
 ALTER TABLE SocialGroups 
-ADD CONSTRAINT base_satisfaction_check CHECK (baseSatisfaction >= 0 AND baseSatisfaction <= 1),
+ADD CONSTRAINT base_happiness_check CHECK (baseHappiness >= 0 AND baseHappiness <= 1),
 ADD CONSTRAINT volunteers_check CHECK (volunteers >= 0);
 
-CREATE TABLE Populations (id SERIAL NOT NULL, fk_SocialGroups int4 NOT NULL, fk_Cultures int4 NOT NULL, fk_Religions int4 NOT NULL, fk_Locations int4 NOT NULL, satisfaction float4 NOT NULL, PRIMARY KEY (id));
+CREATE TABLE Populations (id SERIAL NOT NULL, fk_SocialGroups int4 NOT NULL, fk_Cultures int4 NOT NULL, fk_Religions int4 NOT NULL, fk_Locations int4 NOT NULL, happiness float4 NOT NULL, PRIMARY KEY (id));
 ALTER TABLE Populations 
-ADD CONSTRAINT satisfaction_check CHECK (satisfaction >= 0 AND satisfaction <= 1);
+ADD CONSTRAINT happiness_check CHECK (happiness >= 0 AND happiness <= 1);
 
 CREATE TABLE Locations (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, "size" int4 NOT NULL, fortifications int4 DEFAULT 0 NOT NULL, fk_Nations int4 NOT NULL, PRIMARY KEY (id));
 ALTER TABLE Locations 
@@ -32,7 +32,7 @@ CREATE TABLE Troops (id SERIAL NOT NULL, quantity int4 NOT NULL, fk_Armies int4 
 ALTER TABLE Troops 
 ADD CONSTRAINT quantity_check CHECK (quantity > 0);
 
-CREATE TABLE UnitTypes (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, melee int4 NOT NULL, range int4 DEFAULT 0 NOT NULL, speed int4 NOT NULL, morale int4 NOT NULL, volunteersNeeded int4 NOT NULL, isNaval BOOLEAN NOT NULL, PRIMARY KEY (id));
+CREATE TABLE UnitTypes (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, melee int4 NOT NULL, range int4 DEFAULT 0 NOT NULL, speed int4 NOT NULL, morale int4 NOT NULL, defense int4 NOT NULL, volunteersNeeded int4 NOT NULL, isNaval BOOLEAN NOT NULL, PRIMARY KEY (id));
 
 CREATE TABLE Nations (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, fk_Cultures int4 NOT NULL, fk_Religions int4 NOT NULL, PRIMARY KEY (id));
 
@@ -44,7 +44,9 @@ CREATE TABLE OwnedResources (id SERIAL NOT NULL, fk_Nations int4 NOT NULL, fk_Re
 ALTER TABLE OwnedResources
 ADD CONSTRAINT owned_resources_amount_check CHECK (amount >= 0);
 
-CREATE TABLE TradeAgreements (id SERIAL NOT NULL, fk_NationOffering int4 NOT NULL, fk_NationReceiving int4 NOT NULL, isAccepted BOOLEAN NOT NULL, PRIMARY KEY (id));
+CREATE TABLE TradeAgreements (id SERIAL NOT NULL, fk_NationOffering int4 NOT NULL, fk_NationReceiving int4 NOT NULL, isAccepted BOOLEAN NOT NULL, duration int4 NOT NULL, PRIMARY KEY (id));
+ALTER TABLE TradeAgreements
+ADD CONSTRAINT trade_agreement_duration_check CHECK (duration >= 0);
 
 CREATE TABLE Events (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255), PRIMARY KEY (id));
 
@@ -373,5 +375,3 @@ UNIQUE (fk_Nations, fk_UnitTypes);
 ALTER TABLE OwnedResources
 ADD CONSTRAINT unique_nation_resource_owned
 UNIQUE (fk_Nations, fk_Resources);
-
--- UserResources, productionshares, maintaincost, productioncost, locationresources, relatedevents
