@@ -380,10 +380,6 @@ ALTER TABLE UsedResources
 ADD CONSTRAINT unique_social_group_resource_used
 UNIQUE (fk_SocialGroups, fk_Resources);
 
-ALTER TABLE UsedResources
-ADD CONSTRAINT unique_social_group_resource_used
-UNIQUE (fk_SocialGroups, fk_Resources);
-
 ALTER TABLE ProductionShares
 ADD CONSTRAINT unique_social_group_resource_share
 UNIQUE (fk_SocialGroups, fk_Resources);
