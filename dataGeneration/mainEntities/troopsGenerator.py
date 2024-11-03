@@ -1,22 +1,22 @@
 from collections import namedtuple
 from faker import Faker
 import random
+from dataGeneration.config import *
 
-troopsCount=100
-maxTroopsQuantity= 10000
-minTroopsQuantity=100
+
 
 Troops= namedtuple("Troops",["id","quantity","army","unitType"])
 
 
-def generateTroops(armiesCount, unitTypes):
+def generateTroops():
+    armiesCount = ARMIES_COUNT
+    unitTypes = UNIT_TYPE_COUNT
     fake=Faker()
     rows=[]
-    for i in range(troopsCount):
-        row=Troops(i, random.randint(minTroopsQuantity,maxTroopsQuantity), random.randint(0,armiesCount), random.randint(0,unitTypes))
+    for i in range(TROOPS_COUNT):
+        row=Troops(i, random.randint(MIN_TROOPS_QUANTITY,MAX_TROOPS_QUANTITY), random.randint(0,armiesCount-1), random.randint(0,unitTypes-1))
         rows.append(row)
 
     return rows
 
 
-print(generateTroops(100,10))

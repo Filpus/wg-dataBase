@@ -1,20 +1,21 @@
 from collections import namedtuple
 from faker import Faker
 import random
+from dataGeneration.config import *
 
-armiesCount=10000
 
 Army= namedtuple("Army",  ["id","name", "nation","location"])
 
 
-def generateArmies(nationNum, locationNum):
+def generateArmies():
+    nationNum = NATIONS_COUNT
+    locationNum = LOCATION_COUNT
     fake=Faker()
     armies=[]
-    for i in range(armiesCount):
-        army=Army(i,fake.word(),random.randint(0,nationNum),random.randint(0,locationNum))
+    for i in range(ARMIES_COUNT):
+        army=Army(i,fake.word(),random.randint(0,nationNum-1),random.randint(0,locationNum-1))
         armies.append(army)
 
     return armies
 
 
-print(generateArmies(200,10000))

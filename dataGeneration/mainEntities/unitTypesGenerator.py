@@ -1,8 +1,9 @@
 from collections import namedtuple
 from faker import Faker
 import random
+from dataGeneration.config import *
 
-typesCount=10
+
 maxSpeed=10
 minSpeed=1
 maxMorale=20
@@ -14,6 +15,7 @@ UnitType= namedtuple("UnitType",["id","name","meleDmg","rangedDmg","speed","mora
 
 
 def generateUnitTypes():
+    typesCount=UNIT_TYPE_COUNT
     fake=Faker()
     rows=[]
     for i in range(typesCount):
@@ -23,4 +25,3 @@ def generateUnitTypes():
     return rows
 
 
-print(generateUnitTypes())

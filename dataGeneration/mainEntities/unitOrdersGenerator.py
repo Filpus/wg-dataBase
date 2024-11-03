@@ -1,22 +1,25 @@
 from collections import namedtuple
 from faker import Faker
 import random
+from dataGeneration.config import *
 
-ordersCount=50000
-maxTroopsQuantity= 10000
-minTroopsQuantity=100
+
 
 Order= namedtuple("Order",["id","nation","unitType","quantity"])
+existingOrders=set()
 
+def generateOrders():
+    nationsCount = NATIONS_COUNT
+    unitTypes = UNIT_TYPE_COUNT
 
-def generateOrders(nationsCount, unitTypes):
     fake=Faker()
     rows=[]
-    for i in range(ordersCount):
-        row=Order(i, random.randint(0,nationsCount), random.randint(0,unitTypes), random.randint(minTroopsQuantity,maxTroopsQuantity))
-        rows.append(row)
+    for i in range(ORDERS_COUNT):
+        row=Order(i, random.randint(0,nationsCount-1), random.randint(0,unitTypes-1), random.randint(MIN_TROOPS_QUANTITY,MAX_TROOPS_QUANTITY))
+        if (row.nation,row.unitType) not in existingOrders:
+            existingOrders.add((row.nation,row.unitType))
+            rows.append(row)
 
     return rows
 
 
-print(generateOrders(100,10))
