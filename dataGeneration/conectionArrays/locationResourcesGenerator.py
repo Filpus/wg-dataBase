@@ -7,7 +7,7 @@ from dataGeneration.config import *
 
 
 ResLoc= namedtuple("ResLoc",["id","location","resource","amount"])
-
+existingResourcseInLocation = set()
 
 def generateResourcesLoc():
     locationCount = LOCATION_COUNT
@@ -16,7 +16,11 @@ def generateResourcesLoc():
     rows=[]
     for i in range(LOC_RESOURCE_COUNT):
         row=ResLoc(i, random.randint(0,locationCount-1), random.randint(0,resourceCount-1), random.randint(0,100))
-        rows.append(row)
+        resourceInLocation = row.resource, row.location
+        if resourceInLocation not in existingResourcseInLocation:
+            rows.append(row)
+            existingResourcseInLocation.add(resourceInLocation)
+
 
     return rows
 

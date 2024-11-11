@@ -37,7 +37,7 @@ connection = psycopg2.connect(
     host="localhost",
     database="wg",
     user="postgres",
-    password="admin"
+    password="Filip1234"
 )
 cursor = connection.cursor()
 
@@ -46,9 +46,9 @@ cursor = connection.cursor()
 cultures_query = '''INSERT INTO cultures (id, name) VALUES (%s, %s);'''
 religions_query = '''INSERT INTO religions (id, name) VALUES (%s, %s);'''
 resources_query = '''INSERT INTO resources (id, name, ismain) VALUES (%s, %s,%s);'''
-socialgroups_query = '''INSERT INTO socialgroups (id, name, basesatisfaction, volunteers) VALUES (%s, %s,%s, %s);'''
+socialgroups_query = '''INSERT INTO socialgroups (id, name, baseHappiness, volunteers) VALUES (%s, %s,%s, %s);'''
 users_query = '''INSERT INTO users (id, name,email,password,isarchived) VALUES (%s, %s,%s, %s,%s);'''
-unittypes_query = '''INSERT INTO unittypes (id, name,melee, range,speed,morale,volunteersneeded,isnaval) VALUES (%s, %s,%s, %s,%s, %s,%s, %s);'''
+unittypes_query = '''INSERT INTO unittypes (id, name,melee, range,defense,speed,morale,volunteersneeded,isnaval) VALUES (%s, %s,%s,%s, %s,%s, %s,%s, %s);'''
 
 # Encje zależne
 nations_query = '''INSERT INTO nations (id, name,fk_cultures,fk_religions) VALUES (%s, %s,%s, %s);'''
@@ -65,11 +65,11 @@ modifiers_query = '''INSERT INTO modifiers (id, fk_events,target,fk_resources,fk
 offeredresources_query = '''INSERT INTO offeredresources (id, fk_resources,fk_tradeagreements, amount) VALUES (%s, %s,%s, %s);'''
 ownedresources_query = '''INSERT INTO ownedresources (id, fk_nations, fk_resources,amount) VALUES (%s, %s,%s, %s);'''
 permissions_query = '''INSERT INTO permissions (id, name) VALUES (%s, %s);'''
-populations_query = '''INSERT INTO populations (id, fk_socialgroups, fk_cultures, fk_religions, fk_locations, satisfaction) VALUES (%s, %s,%s, %s,%s, %s);'''
+populations_query = '''INSERT INTO populations (id, fk_socialgroups, fk_cultures, fk_religions, fk_locations, happiness) VALUES (%s, %s,%s, %s,%s, %s);'''
 productioncosts_query = '''INSERT INTO productioncosts (id, fk_unittypes, fk_resources, amount) VALUES (%s, %s,%s, %s);'''
 productionshares_query = '''INSERT INTO productionshares (id, fk_socialgroups, fk_resources, coefficient) VALUES (%s, %s,%s, %s);'''
 relatedevents_query = '''INSERT INTO relatedevents (id, fk_nations, fk_events) VALUES (%s, %s,%s);'''
-tradeagreements_query = '''INSERT INTO tradeagreements (id, fk_nationoffering, fk_nationreceiving,isaccepted) VALUES (%s, %s,%s, %s);'''
+tradeagreements_query = '''INSERT INTO tradeagreements (id, fk_nationoffering, fk_nationreceiving,isaccepted,duration) VALUES (%s, %s,%s, %s,%s);'''
 troops_query = '''INSERT INTO troops (id, quantity, fk_armies, fk_unittypes) VALUES (%s, %s,%s, %s);'''
 unitorders_query = '''INSERT INTO unitorders (id, fk_nations, fk_unittypes, quantity) VALUES (%s, %s,%s, %s);'''
 usedresources_query = '''INSERT INTO usedresources  (id, fk_socialgroups,fk_resources,amount) VALUES (%s, %s,%s, %s);'''

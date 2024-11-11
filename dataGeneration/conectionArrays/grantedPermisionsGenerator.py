@@ -7,7 +7,7 @@ from dataGeneration.config import *
 
 
 Permission= namedtuple("Permission",["id","user","permission"])
-
+existingPermisions = set()
 
 def generateGrantedPermissions():
     userCount = USERS_COUNT
@@ -15,7 +15,10 @@ def generateGrantedPermissions():
     rows=[]
     for i in range(userCount):
         row=Permission(i, i, random.randint(0,PERM_COUNT-1))
-        rows.append(row)
+        permisions = row.user, row.permission
+        if permisions not in existingPermisions:
+            rows.append(row)
+            existingPermisions.add(permisions)
 
     return rows
 

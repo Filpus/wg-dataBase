@@ -6,7 +6,7 @@ from dataGeneration.config import *
 
 costsCount=100
 MaintenanceCost= namedtuple("MaintenanceCost",["id","unitType","resource","amount"])
-
+existingMaintenaceCost = set()
 
 def generateMaintenanceCosts():
     resourceCount = RESOURCE_COUNT
@@ -15,7 +15,10 @@ def generateMaintenanceCosts():
     rows=[]
     for i in range(costsCount):
         row=MaintenanceCost(i, random.randint(0,unitTypeCount-1), random.randint(0,resourceCount-1), random.randint(1,50))
-        rows.append(row)
+        maintenaceCost = row.unitType, row.resource
+        if maintenaceCost not in existingMaintenaceCost:
+            rows.append(row)
+            existingMaintenaceCost.add(maintenaceCost)
 
 
     return rows
