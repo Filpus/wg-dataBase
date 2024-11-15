@@ -35,6 +35,23 @@ JOIN
 GROUP BY 
     nation.name;
 
+-- Query 7: Number of volunteers in a country
+SELECT 
+    nation.name AS nation_name,
+    SUM(sg.volunteers) AS total_volunteers
+FROM
+    Nations nation
+JOIN 
+    Locations loc ON nation.id = loc.fk_Nations
+JOIN 
+    Populations pop ON loc.id = pop.fk_Locations
+JOIN 
+    SocialGroups sg ON pop.fk_SocialGroups = sg.id
+WHERE
+    nation.name = 'Specific Nation Name'
+GROUP BY 
+    nation.name;
+
 -- Query 8: List of who is trading with whom
 SELECT DISTINCT n1.name AS nation_offering, n2.name AS nation_receiving
 FROM TradeAgreements ta
