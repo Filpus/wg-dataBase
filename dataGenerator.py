@@ -37,7 +37,7 @@ connection = psycopg2.connect(
     host="localhost",
     database="wg",
     user="postgres",
-    password="Filip1234"
+    password="www"
 )
 cursor = connection.cursor()
 
