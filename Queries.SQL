@@ -10,7 +10,7 @@ JOIN
 JOIN 
     Resources resource ON owned_resources.fk_Resources = resource.id
 WHERE 
-    nation.name = 'Specific Nation Name';
+    nation.name = 'Poland';
 
 -- Query 3: Average happiness of the population in a given country by culture
 SELECT c.name AS culture_name, ROUND(AVG(p.happiness)::numeric, 2) AS average_happiness
