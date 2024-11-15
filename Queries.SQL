@@ -43,6 +43,20 @@ JOIN Nations n2 ON ta.fk_NationReceiving = n2.id
 WHERE ta.isAccepted
 ORDER BY n1.name ASC, n2.name ASC;
 
+-- Query 10: Localization of armies within a country
+SELECT 
+    nation.name AS nation_name,
+    army.name AS army_name,
+    loc.name AS location_name
+FROM
+    Armies army
+JOIN 
+    Locations loc ON army.fk_Locations = loc.id
+JOIN 
+    Nations nation ON loc.fk_Nations = nation.id
+WHERE 
+    nation.name = 'Poland';
+
 -- Query 12: Number of followers of a given religion in the game
 SELECT r.name AS religion_name,
 COUNT(p.id) AS total_followers
