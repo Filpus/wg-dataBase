@@ -22,6 +22,19 @@ WHERE n.name = 'Ukraine'  -- Replace 'Ukraine' with the country name
 GROUP BY c.name
 ORDER BY average_happiness DESC;
 
+-- Query 5: Pops number of a country
+SELECT 
+    nation.name AS nation_name,
+    COUNT(pop.id) AS pop_count
+FROM
+    Nations nation
+JOIN
+    Locations loc ON nation.id = loc.fk_Nations
+JOIN
+    Populations pop ON loc.id = pop.fk_Locations
+GROUP BY 
+    nation.name;
+
 -- Query 8: List of who is trading with whom
 SELECT DISTINCT n1.name AS nation_offering, n2.name AS nation_receiving
 FROM TradeAgreements ta
