@@ -1,3 +1,17 @@
+-- Query 1: The amount of each resource a nation has
+SELECT 
+    nation.name AS nation_name,
+    resource.name AS resource_name,
+    owned_resources.amount AS resource_amount
+FROM 
+    Nations nation
+JOIN 
+    OwnedResources owned_resources ON nation.id = owned_resources.fk_Nations
+JOIN 
+    Resources resource ON owned_resources.fk_Resources = resource.id
+WHERE 
+    nation.name = 'Specific Nation Name';
+
 -- Query 3: Average happiness of the population in a given country by culture
 SELECT c.name AS culture_name, ROUND(AVG(p.happiness)::numeric, 2) AS average_happiness
 FROM Populations p
