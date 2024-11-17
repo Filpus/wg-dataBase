@@ -12,6 +12,20 @@ JOIN
 WHERE 
     nation.name = 'Poland';
 
+-- Query 2: Country assigned to each player
+SELECT
+    nations.name AS nation_name,
+    users.name AS username
+FROM
+    accessestonations access
+JOIN
+    users ON access.fk_users =users.id
+JOIN
+    nations ON access.fk_nations = nations.id
+WHERE
+    nations.name = 'Peru';
+
+
 -- Query 3: Average happiness of the population in a given country by culture
 SELECT c.name AS culture_name, ROUND(AVG(p.happiness)::numeric, 2) AS average_happiness
 FROM Populations p
@@ -34,6 +48,28 @@ JOIN
     Populations pop ON loc.id = pop.fk_Locations
 GROUP BY 
     nation.name;
+
+-- Query 6:  Total pay for soldiers in the nation per turn (parameter: nation)
+SELECT
+    r.name AS nazwa_zasobu,
+    SUM(mc.amount * t.quantity) AS sumaryczna_ilosc
+FROM
+    Troops t
+JOIN
+    Armies a ON t.fk_Armies = a.id
+JOIN
+    Nations n ON a.fk_Nations = n.id
+JOIN
+    MaintenanceCosts mc ON t.fk_UnitTypes = mc.fk_UnitTypes
+JOIN
+    Resources r ON mc.fk_Resources = r.id
+WHERE
+    n.name = :nazwa_panstwa
+GROUP BY
+    r.name
+ORDER BY
+    nazwa_zasobu;
+
 
 -- Query 7: Number of volunteers in a country
 SELECT 
@@ -74,6 +110,21 @@ JOIN
 WHERE 
     nation.name = 'Poland';
 
+-- Query 11: List of unresolved actions of a nation (parameter: nation)
+SELECT
+    a.name AS nazwa_akcji,
+    a.description AS opis_akcji,
+    a.isSettled AS czy_rozpatrzona
+FROM
+    Actions a
+JOIN
+    Nations n ON a.fk_Nations = n.id
+WHERE
+    n.name = :nazwa_panstwa
+    AND a.isSettled = FALSE
+ORDER BY
+    a.name;
+
 -- Query 12: Number of followers of a given religion in the game
 SELECT r.name AS religion_name,
 COUNT(p.id) AS total_followers
@@ -81,6 +132,32 @@ FROM Religions r
 LEFT JOIN Populations p ON p.fk_Religions = r.id
 GROUP BY r.name
 ORDER BY total_followers DESC, r.name ASC;
+
+--Query 14: All production modifiers of a resource of a nation (parameters: resource, nation)
+    SELECT
+    m.id AS id_modyfikatora,
+    m.target AS cel_modyfikatora,
+    e.name AS nazwa_wydarzenia,
+    e.description AS opis_wydarzenia,
+    r.name AS nazwa_zasobu,
+    sg.name AS grupa_spoleczna
+FROM
+    Modifiers m
+JOIN
+    Events e ON m.fk_Events = e.id
+JOIN
+    Resources r ON m.fk_Resources = r.id
+LEFT JOIN
+    SocialGroups sg ON m.fk_SocialGroups = sg.id
+JOIN
+    Nations n ON n.fk_Cultures = sg.id OR n.fk_Religions = sg.id
+WHERE
+    n.name = :nazwa_panstwa
+    AND r.name = :nazwa_zasobu
+    AND m.target = 'Production'
+ORDER BY
+    m.id;
+
 
 -- Query 16: Displaying nations that have more than 'X' of a given resource 'Y'
 SELECT n.name AS nation_name, r.name AS resource_name, owned_res.amount AS resource_amount

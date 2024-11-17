@@ -37,7 +37,7 @@ connection = psycopg2.connect(
     host="localhost",
     database="wg",
     user="postgres",
-    password="www"
+    password="admin"
 )
 cursor = connection.cursor()
 
@@ -141,13 +141,12 @@ functionsList = [
     generateWantedResource    # wantedresources_query
 ]
 
-
-
 for i in range(len(queryList)):
+    print(str(i)+" executing :  "+functionsList[i].__name__+ "  ")
     data=functionsList[i]()
     query=queryList[i]
 
-    print(str(i)+":  "+queryList[i]+ "  ")
+    print(str(i)+" writing:  "+queryList[i]+ "  ")
     cursor.executemany(query, data)
 
     connection.commit()
