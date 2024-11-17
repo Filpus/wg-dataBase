@@ -23,7 +23,7 @@ JOIN
 JOIN
     nations ON access.fk_nations = nations.id
 WHERE
-    nations.name = 'Peru';
+    nations.name = :country_name;
 
 
 -- Query 3: Average happiness of the population in a given country by culture
