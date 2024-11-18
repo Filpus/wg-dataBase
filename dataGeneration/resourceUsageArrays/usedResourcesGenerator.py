@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 UsedResource= namedtuple("UsedResource",["id","group","resource","amount"])
-
+existingUsedResources = set()
 
 def generateUsedResource():
     resourceCount = RESOURCE_COUNT
@@ -22,8 +22,11 @@ def generateUsedResource():
 
         if k==100: continue
         row=UsedResource(i, grp_res_pair[0],grp_res_pair[1], random.randint(1,50))
-        rows.append(row)
 
+        ur = row.resource, row.group
+        if ur not in existingUsedResources:
+            rows.append(row)
+            existingUsedResources.add(ur)
 
     return rows
 
