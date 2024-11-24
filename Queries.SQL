@@ -13,7 +13,8 @@ WHERE
     nation.name = 'Poland';
 
 -- Query 2: Country assigned to each player
-SELECT
+
+EXPLAIN ANALYSE SELECT
     nations.name AS nation_name,
     users.name AS username
 FROM
@@ -50,7 +51,7 @@ GROUP BY
     nation.name;
 
 -- Query 6:  Total pay for soldiers in the nation per turn (parameter: nation)
-SELECT
+EXPLAIN ANALYSE SELECT
     r.name AS nazwa_zasobu,
     SUM(mc.amount * t.quantity) AS sumaryczna_ilosc
 FROM
@@ -111,7 +112,7 @@ WHERE
     nation.name = 'Poland';
 
 -- Query 11: List of unresolved actions of a nation (parameter: nation)
-SELECT
+EXPLAIN ANALYSE SELECT
     a.name AS nazwa_akcji,
     a.description AS opis_akcji,
     a.isSettled AS czy_rozpatrzona
@@ -134,7 +135,7 @@ GROUP BY r.name
 ORDER BY total_followers DESC, r.name ASC;
 
 --Query 14: All production modifiers of a resource of a nation (parameters: resource, nation)
-    SELECT
+EXPLAIN ANALYSE SELECT
     m.id AS id_modyfikatora,
     m.target AS cel_modyfikatora,
     e.name AS nazwa_wydarzenia,
