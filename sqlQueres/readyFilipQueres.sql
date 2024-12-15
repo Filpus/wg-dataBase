@@ -18,9 +18,10 @@ BEGIN
             l.id, l.name;
 END;
 $$ LANGUAGE plpgsql;
-SELECT * FROM avg_happiness_by_nation(1); -- gdzie 1 to id państwa
 
-SELECT
+EXPLAIN SELECT * FROM avg_happiness_by_nation(1); -- gdzie 1 to id państwa
+
+EXPLAIN ANALYSE  SELECT
     n.id AS nation_id,
     n.name AS nation_name,
     SUM(t.quantity) AS total_army_size
@@ -71,7 +72,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-SELECT
+EXPLAIN ANALYSE select
     nations.name as nation,
     nations.id as id,
     resources.name as recource,
@@ -88,7 +89,8 @@ GROUP BY
     nations.id, resources.id
 ;
 
-SELECT
+EXPLAIN ANALYSE SELECT
+
     nations.name as nation,
     nations.id as id,
     resources.name as recource,

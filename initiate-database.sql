@@ -403,3 +403,21 @@ UNIQUE (fk_Nations, fk_Events);
 ALTER TABLE AccessesToUnits
 ADD CONSTRAINT unique_nation_unit_access
 UNIQUE (fk_Nations, fk_UnitTypes);
+
+
+
+--Indexy
+CREATE INDEX nationName
+ON Nations (name);
+
+CREATE UNIQUE INDEX resourceName
+ON Resources (name);
+
+CREATE UNIQUE INDEX religionName
+ON Religions (name);
+
+CREATE UNIQUE INDEX cultureName
+ON Cultures (name);
+
+CREATE UNIQUE INDEX  socialGroupName
+ON SocialGroups (name);

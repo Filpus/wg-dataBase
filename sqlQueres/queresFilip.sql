@@ -148,3 +148,9 @@ GROUP BY
     nations.name, nations.id, resources.name;
 
 SELECT calculate_population_production(1, 1);  -- Oblicza bilans zasobu o `resource_id = 2` w państwie o `nation_id = 1`
+
+INSERT INTO cultures (name)
+VALUES ('test')
+
+INSERT INTO tradeagreements (fk_nationoffering, fk_nationreceiving
+                            , isaccepted, duration) VALUES (0,0,false,1)

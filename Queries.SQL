@@ -9,8 +9,8 @@ JOIN
     OwnedResources owned_resources ON nation.id = owned_resources.fk_Nations
 JOIN 
     Resources resource ON owned_resources.fk_Resources = resource.id
-WHERE 
-    nation.name = 'Poland';
+WHERE
+    nation.name = 'Spain';
 
 -- Query 2: Country assigned to each player
 SELECT
@@ -22,8 +22,7 @@ JOIN
     users ON access.fk_users =users.id
 JOIN
     nations ON access.fk_nations = nations.id
-WHERE
-    nations.name = :country_name;
+;
 
 
 -- Query 3: Average happiness of the population in a given country by culture
@@ -31,8 +30,7 @@ SELECT c.name AS culture_name, ROUND(AVG(p.happiness)::numeric, 2) AS average_ha
 FROM Populations p
 JOIN Cultures c ON p.fk_Cultures = c.id
 JOIN Locations l ON p.fk_Locations = l.id
-JOIN Nations n ON l.fk_Nations = n.id
-WHERE n.name = 'Ukraine'  -- Replace 'Ukraine' with the country name
+JOIN Nations n ON l.fk_Nations = n.id  -- Replace 'Ukraine' with the country name
 GROUP BY c.name
 ORDER BY average_happiness DESC;
 
@@ -83,8 +81,7 @@ JOIN
     Populations pop ON loc.id = pop.fk_Locations
 JOIN 
     SocialGroups sg ON pop.fk_SocialGroups = sg.id
-WHERE
-    nation.name = 'Specific Nation Name'
+
 GROUP BY 
     nation.name;
 
@@ -107,8 +104,8 @@ JOIN
     Locations loc ON army.fk_Locations = loc.id
 JOIN 
     Nations nation ON loc.fk_Nations = nation.id
-WHERE 
-    nation.name = 'Poland';
+WHERE
+    nation.name = '';
 
 -- Query 11: List of unresolved actions of a nation (parameter: nation)
 SELECT
@@ -164,6 +161,6 @@ SELECT n.name AS nation_name, r.name AS resource_name, owned_res.amount AS resou
 FROM Nations n
 JOIN OwnedResources owned_res ON n.id = owned_res.fk_Nations
 JOIN Resources r ON owned_res.fk_Resources = r.id
-WHERE r.name = 'year'  -- Replace 'year' with the resource name
-AND owned_res.amount > 100  -- Replace '100' with the minimum amount of resource
+WHERE r.name = 'data'  -- Replace 'year' with the resource name
+AND owned_res.amount > 800  -- Replace '100' with the minimum amount of resource
 ORDER BY owned_res.amount DESC, n.name ASC;
