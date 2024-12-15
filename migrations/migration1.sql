@@ -90,9 +90,10 @@ WITH sorted_troops AS (
 ),
 sorted_pops AS (
     SELECT p.id AS pop_id,
-           p.fk_Nations,
-           ROW_NUMBER() OVER(PARTITION BY p.fk_Nations ORDER BY p.id) AS p_rn
+           loc.fk_Nations AS fk_Nations,
+           ROW_NUMBER() OVER(PARTITION BY loc.fk_Nations ORDER BY p.id) AS p_rn
     FROM Populations p
+    JOIN Locations loc ON p.fk_Locations = loc.id
 )
 UPDATE Troops tr
 SET fk_Populations = sp.pop_id
