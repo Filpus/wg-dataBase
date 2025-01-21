@@ -4,7 +4,7 @@ import random
 from dataGeneration.config import *
 
 
-UsedResource= namedtuple("UsedResource",["id","group","resource","amount"])
+UsedResource= namedtuple("UsedResource",["group","resource","amount"])
 existingUsedResources = set()
 
 def generateUsedResource():
@@ -15,13 +15,13 @@ def generateUsedResource():
     rows=[]
     for i in range(USAGE_COUNT):
         k=0
-        grp_res_pair=(random.randint(0,groupsCount-1), random.randint(0,resourceCount-1))
+        grp_res_pair=(random.randint(1,groupsCount), random.randint(1,resourceCount))
         while(groupResourcePairs.__contains__(grp_res_pair) or k<100):
-            grp_res_pair=(random.randint(0,groupsCount-1), random.randint(0,resourceCount-1))
+            grp_res_pair=(random.randint(1,groupsCount), random.randint(1,resourceCount))
             k+=1
 
         if k==100: continue
-        row=UsedResource(i, grp_res_pair[0],grp_res_pair[1], random.randint(1,50))
+        row=UsedResource( grp_res_pair[0],grp_res_pair[1], random.randint(1,50))
 
         ur = row.resource, row.group
         if ur not in existingUsedResources:

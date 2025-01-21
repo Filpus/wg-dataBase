@@ -5,14 +5,14 @@ from dataGeneration.config import *
 
 resourceCount=100
 
-Resource= namedtuple("Resource",["id","name","isMain"])
+Resource= namedtuple("Resource",["name","isMain"])
 
 
 def generateResources():
     fake=Faker()
     rows=[]
     for i in range(RESOURCE_COUNT):
-        row=Resource(i, fake.unique.word(), bool(random.randint(0,1)))
+        row=Resource( fake.unique.word(), bool(random.randint(0,1)))
         rows.append(row)
 
     return rows

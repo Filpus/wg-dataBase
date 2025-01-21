@@ -4,7 +4,7 @@ import random
 from dataGeneration.config import *
 
 sharesCount=100
-ProductionShare= namedtuple("ProductionShare",["id","group","resource","coef"])
+ProductionShare= namedtuple("ProductionShare",["group","resource","coef"])
 existingProductionShare = set()
 
 def generateProductionShare():
@@ -13,7 +13,7 @@ def generateProductionShare():
     fake=Faker()
     rows=[]
     for i in range(sharesCount):
-        row=ProductionShare(i, random.randint(0,groupsCount-1), random.randint(0,resourceCount-1), random.randint(1,50))
+        row=ProductionShare( random.randint(1,groupsCount), random.randint(1,resourceCount), random.randint(1,50))
         productionShare = row.group,row.resource
         if productionShare not in existingProductionShare:
             rows.append(row)

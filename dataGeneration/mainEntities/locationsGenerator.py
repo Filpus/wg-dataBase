@@ -4,7 +4,7 @@ import random
 from dataGeneration.config import *
 
 
-namedtuple("location",["id","name", "size","fortifications","nation"])
+namedtuple("location",["name", "size","fortifications","nation"])
 
 
 def generateLocations():
@@ -13,7 +13,7 @@ def generateLocations():
     fake=Faker()
     locations=[]
     for i in range(LOCATION_COUNT):
-        location=(i,fake.unique.word(),random.randint(1,MAX_LOCATION_SIZE),random.randint(1,MAX_FORTIFICATION_SIZE),random.randint(1,nationsCount-1))
+        location=(fake.unique.word(),random.randint(1,MAX_LOCATION_SIZE),random.randint(1,MAX_FORTIFICATION_SIZE),random.randint(1,nationsCount))
         locations.append(location)
 
     return locations

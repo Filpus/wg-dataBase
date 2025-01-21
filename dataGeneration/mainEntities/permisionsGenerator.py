@@ -5,14 +5,14 @@ from dataGeneration.config import *
 
 
 
-Permission= namedtuple("Permission",["id","name"])
+Permission= namedtuple("Permission",["name"])
 
 
 def generatePermissionTypes():
     fake=Faker()
     permissions=[]
     for i in range(PERM_COUNT):
-        permission=Permission(i, fake.unique.word())
+        permission=Permission( fake.unique.word())
         permissions.append(permission)
 
     return permissions

@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 
-Action= namedtuple("Action",  ["id","nation","name", "description","result","isSettled"])
+Action= namedtuple("Action",  ["nation","name", "description","result","isSettled"])
 
 
 def generateActions():
@@ -13,7 +13,7 @@ def generateActions():
     fake=Faker()
     actions=[]
     for i in range(ACTION_COUNT):
-        action=Action(i,random.randint(0,nationNum-1),fake.word(),fake.text(),fake.text(),bool(random.randint(0,1)))
+        action=Action(random.randint(1,nationNum),fake.word(),fake.text(),fake.text(),bool(random.randint(0,1)))
         actions.append(action)
 
     return actions

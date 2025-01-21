@@ -70,6 +70,50 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION calculate_population_production(nation_id INT, resource_id INT)
+    RETURNS FLOAT AS $$
+DECLARE
+    production FLOAT := 0;
+BEGIN
+
+
+END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT
+    locations.name as Locations,
+    locations.id as lId,
+    nations.name as nation
+
+FROM
+    nations left join locations on nations.id = locations.fk_nations
+WHERE
+    nations.id = 1;
+
+SELECT
+
+    resources.name as resource,
+    locationresources.amount as amount,
+    locations.name as lname,
+    nations.id as id,
+    populations.id as pop,
+    socialgroups.name as sg,
+    productionshares.coefficient as coe,
+    productionshares.fk_resources as fk_resources,
+    productionshares.fk_socialgroups as fkSG
+
+FROM
+    resources
+        left join locationresources on resources.id = locationresources.fk_resources
+        left join locations on locationresources.fk_locations = locations.id
+        right join nations on locations.fk_nations = nations.id
+        left join populations on locations.id = populations.fk_locations
+        left join socialgroups on populations.fk_socialgroups = socialgroups.id
+        left join productionshares on resources.id = productionshares.fk_resources
+WHERE resources.id = 1
+;
+
 
 SELECT
     nations.name as nation,
@@ -102,3 +146,11 @@ FROM
         left join resources on usedresources.fk_resources = resources.id
 GROUP BY
     nations.name, nations.id, resources.name;
+
+SELECT calculate_population_production(1, 1);  -- Oblicza bilans zasobu o `resource_id = 2` w państwie o `nation_id = 1`
+
+INSERT INTO cultures (name)
+VALUES ('test')
+
+INSERT INTO tradeagreements (fk_nationoffering, fk_nationreceiving
+                            , isaccepted, duration) VALUES (0,0,false,1)

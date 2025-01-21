@@ -5,14 +5,14 @@ from dataGeneration.config import *
 
 
 
-Event= namedtuple("Event",["id","name", "description"])
+Event= namedtuple("Event",["name", "description"])
 
 
 def generateEvents():
     fake=Faker()
     events=[]
     for i in range(EVENT_COUNT):
-        event=Event(i,fake.word(),fake.text())
+        event=Event(fake.word(),fake.text())
         events.append(event)
 
     return events

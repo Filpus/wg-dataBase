@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 
-TradeOffer= namedtuple("TradeOffer",["id","resource","agreement","amount"])
+TradeOffer= namedtuple("TradeOffer",["resource","agreement","amount"])
 
 
 def generateWantedResource():
@@ -14,7 +14,7 @@ def generateWantedResource():
     fake=Faker()
     rows=[]
     for i in range(OFFER_COUNT):
-        row=TradeOffer(i,  random.randint(0,resourceCount-1), random.randint(0,agreementsCount-1),random.randint(1,50))
+        row=TradeOffer( random.randint(1,resourceCount), random.randint(1,agreementsCount),random.randint(1,50))
         rows.append(row)
 
 

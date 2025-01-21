@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 
-Ownership= namedtuple("Ownership",["id","nation","resource", "amount"])
+Ownership= namedtuple("Ownership",["nation","resource", "amount"])
 
 
 def generateOwnerships():
@@ -16,7 +16,7 @@ def generateOwnerships():
     k=0
     for i in range(nationCount):
         for j in range(resourceCount):
-            row=Ownership(k, i, j, random.randint(0,1000))
+            row=Ownership( i+1, j+1, random.randint(0,1000))
             rows.append(row)
             k+=1
 
