@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 
-Order= namedtuple("Order",["id","nation","unitType","quantity"])
+Order= namedtuple("Order",["nation","unitType","quantity"])
 existingOrders=set()
 
 def generateOrders():
@@ -15,7 +15,7 @@ def generateOrders():
     fake=Faker()
     rows=[]
     for i in range(ORDERS_COUNT):
-        row=Order(i, random.randint(0,nationsCount-1), random.randint(0,unitTypes-1), random.randint(MIN_TROOPS_QUANTITY,MAX_TROOPS_QUANTITY))
+        row=Order( random.randint(1,nationsCount), random.randint(1,unitTypes), random.randint(MIN_TROOPS_QUANTITY,MAX_TROOPS_QUANTITY))
         if (row.nation,row.unitType) not in existingOrders:
             existingOrders.add((row.nation,row.unitType))
             rows.append(row)

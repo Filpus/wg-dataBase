@@ -8,14 +8,14 @@ from dataGeneration.config import *
 
 
 
-Pop= namedtuple("Pop",["id","group","culture","religion","location", "satisfaction"])
+Pop= namedtuple("Pop",["group","culture","religion","location", "satisfaction"])
 
 
 def generatePops():
     fake=Faker()
     pops=[]
     for i in range(POP_COUNT):
-        pop=Pop(i, random.randint(0,GROUP_COUNT-1), random.randint(0,CULTURE_COUNT-1),random.randint(0,RELIGION_COUNT-1),random.randint(0,LOCATION_COUNT-1),float(random.randint(0,100)/100))
+        pop=Pop( random.randint(1,GROUP_COUNT), random.randint(1,CULTURE_COUNT),random.randint(1,RELIGION_COUNT),random.randint(1,LOCATION_COUNT),float(random.randint(0,100)/100))
         pops.append(pop)
 
     return pops

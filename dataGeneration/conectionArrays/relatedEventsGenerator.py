@@ -4,7 +4,7 @@ import random
 from dataGeneration.config import *
 
 
-RelatedEvent= namedtuple("RelatedEvent",["id","nation","event"])
+RelatedEvent= namedtuple("RelatedEvent",["nation","event"])
 existingRelatedEvents = set()
 
 def generateRelatedEvents():
@@ -13,7 +13,7 @@ def generateRelatedEvents():
     fake=Faker()
     rows=[]
     for i in range(RELATED_EVENTS_COUNT):
-        row=RelatedEvent(i, random.randint(0,nationCount-1), random.randint(0,eventCount-1))
+        row=RelatedEvent( random.randint(1,nationCount), random.randint(1,eventCount))
         related = row.nation, row.event
         if related not in existingRelatedEvents:
             rows.append(row)

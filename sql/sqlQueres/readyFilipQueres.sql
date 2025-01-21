@@ -24,7 +24,7 @@ EXPLAIN SELECT * FROM avg_happiness_by_nation(1); -- gdzie 1 to id państwa
 EXPLAIN ANALYSE  SELECT
     n.id AS nation_id,
     n.name AS nation_name,
-    SUM(t.quantity) AS total_army_size
+    COUNT(t) AS total_army_size
 FROM
     Nations n
         JOIN
@@ -84,7 +84,8 @@ FROM
         left join unittypes on troops.fk_unittypes = unittypes.id
         left join maintenancecosts on unittypes.id = maintenancecosts.fk_unittypes
         left join resources on maintenancecosts.fk_resources = resources.id
-WHERE nations.id = 0
+WHERE
+    nations.id = 1
 GROUP BY
     nations.id, resources.id
 ;

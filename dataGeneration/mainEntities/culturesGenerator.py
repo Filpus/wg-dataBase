@@ -5,14 +5,14 @@ from dataGeneration.config import *
 
 
 
-Culture= namedtuple("Culture",  ["id","name"])
+Culture= namedtuple("Culture",  ["name"])
 
 
 def generateCulture():
     fake=Faker()
     cultures=[]
     for i in range(CULTURE_COUNT):
-        culture=Culture(i,fake.unique.word())
+        culture=Culture(fake.unique.word())
         cultures.append(culture)
 
     return cultures

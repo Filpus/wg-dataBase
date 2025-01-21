@@ -4,7 +4,7 @@ import random
 from dataGeneration.config import *
 
 
-Army= namedtuple("Army",  ["id","name", "nation","location"])
+Army= namedtuple("Army",  ["name", "nation","location"])
 
 
 def generateArmies():
@@ -13,7 +13,7 @@ def generateArmies():
     fake=Faker()
     armies=[]
     for i in range(ARMIES_COUNT):
-        army=Army(i,fake.word(),random.randint(0,nationNum-1),random.randint(0,locationNum-1))
+        army=Army(fake.word(),random.randint(1,nationNum),random.randint(1,locationNum))
         armies.append(army)
 
     return armies

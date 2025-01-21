@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 modifiersCount=100
 
-Modifier= namedtuple("Modifier",["id","event","target","resource","socialGroup", "culture","religion"])
+Modifier= namedtuple("Modifier",["event","target","resource","socialGroup", "culture","religion"])
 
 
 def generateModifiers():
@@ -18,7 +18,7 @@ def generateModifiers():
     fake=Faker()
     modifiers=[]
     for i in range(MODIFIERS_COUNT):
-        modifier=Modifier(i, random.randint(0,eventsCount-1),ennum[random.randint(0,1)],random.randint(0,resourceCount-1),random.randint(0,groupsCount-1),random.randint(0,cultureCount-1),random.randint(0,religionsCount-1))
+        modifier=Modifier( random.randint(1,eventsCount),ennum[random.randint(0,1)],random.randint(1,resourceCount),random.randint(1,groupsCount),random.randint(1,cultureCount),random.randint(1,religionsCount))
         modifiers.append(modifier)
 
     return modifiers

@@ -32,7 +32,7 @@ ALTER TABLE Troops
 -- Step 3: Add isRecruited to Troops
 --------------------------------------------
 ALTER TABLE Troops
-  ADD COLUMN isRecruited BOOLEAN NOT NULL DEFAULT FALSE;
+  ADD COLUMN isRecruited BOOLEAN NOT NULL DEFAULT TRUE;
 
 --------------------------------------------
 -- Step 4: Remove quantity from Troops before inserting new rows
@@ -40,6 +40,7 @@ ALTER TABLE Troops
 ALTER TABLE Troops
   DROP COLUMN quantity;
 
+ALTER TABLE troops ALTER COLUMN isRecruited SET DEFAULT FALSE;
 --------------------------------------------
 -- Step 5: Migrate UnitOrders into Troops
 -- Create a "Recruit" army per nation that has UnitOrders

@@ -5,14 +5,14 @@ from dataGeneration.config import *
 
 
 
-Religion= namedtuple("Religion",["id","name"])
+Religion= namedtuple("Religion",["name"])
 
 
 def generateReligions():
     fake=Faker()
     rows=[]
     for i in range(RELIGION_COUNT):
-        row=Religion(i, fake.unique.word())
+        row=Religion( fake.unique.word())
         rows.append(row)
 
     return rows

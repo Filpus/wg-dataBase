@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 costsCount=100
-ProductionCost= namedtuple("ProductionCost",["id","unitType","resource","amount"])
+ProductionCost= namedtuple("ProductionCost",["unitType","resource","amount"])
 existingProductionCost = set()
 
 def generateProductionCost():
@@ -13,7 +13,7 @@ def generateProductionCost():
     fake=Faker()
     rows=[]
     for i in range(costsCount):
-        row=ProductionCost(i, random.randint(0, UNIT_TYPE_COUNT-1), random.randint(0,RESOURCE_COUNT-1), random.randint(1,50))
+        row=ProductionCost(random.randint(1, UNIT_TYPE_COUNT), random.randint(1,RESOURCE_COUNT), random.randint(1,50))
         productionCost = row.unitType, row.resource
         if productionCost not in existingProductionCost:
             rows.append(row)

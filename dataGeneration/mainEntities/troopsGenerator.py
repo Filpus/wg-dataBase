@@ -5,7 +5,7 @@ from dataGeneration.config import *
 
 
 
-Troops= namedtuple("Troops",["id","quantity","army","unitType"])
+Troops= namedtuple("Troops",["quantity","army","unitType"])
 
 
 def generateTroops():
@@ -14,7 +14,7 @@ def generateTroops():
     fake=Faker()
     rows=[]
     for i in range(TROOPS_COUNT):
-        row=Troops(i, random.randint(MIN_TROOPS_QUANTITY,MAX_TROOPS_QUANTITY), random.randint(0,armiesCount-1), random.randint(0,unitTypes-1))
+        row=Troops(random.randint(MIN_TROOPS_QUANTITY,MAX_TROOPS_QUANTITY), random.randint(1,armiesCount), random.randint(1,unitTypes))
         rows.append(row)
 
     return rows
