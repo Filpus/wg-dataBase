@@ -21,7 +21,7 @@ class SocialGroup(StructuredNode):
 
 class Pop(StructuredNode):
     satisfaction = FloatProperty(required=True)
-    cultivates = RelationshipTo("Culure", "CULTIVATES", model= CultivatesRel)
+    cultivates = RelationshipTo("Culture", "CULTIVATES", model= CultivatesRel)
     resides = RelationshipTo('Localisation', 'RESIDES', model= ResidesRel)
     worship = RelationshipTo("Religion", "WORSHIP", model=WorshipsRel)
     isPartOf = RelationshipTo("SocialGroup", "ISPARTOF", model=IsPartOfRel)
