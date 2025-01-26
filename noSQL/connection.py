@@ -90,6 +90,34 @@ def generate_data(n):
         socialGroup = random.choice(socialGroups)
         pop.isPartOf.connect(socialGroup)
 
+    for nation in nations:
+        religion = random.choice(religions)
+        nation.worshipsNationally.connect(religion)
+
+        culture = random.choice(cultures)
+        nation.cultivatesNationally.connect(culture)
+
+        resource = random.choice(resources)
+        nation.owning.connect(resource, {"amount": random.randint(10, 100)})
+
+        num_actions = random.randint(1, 3)
+        for _ in range(num_actions):
+            action = random.choice(actions)
+            action.performedBy.connect(nation)
+
+    for user in users:
+        num_access = random.randint(1, 3)
+        for _ in range(num_access):
+            nation = random.choice(nations)
+            user.nationAccess.connect(
+                nation,
+                {
+                    "permisionName": fake.word(),
+                    "isActive": bool(random.randint(0, 1)),
+                    "dateAcquired": fake.date_time_this_year()
+                }
+            )
+
     for culture in cultures:
         culture.save()
     for religion in religions:
