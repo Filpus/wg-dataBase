@@ -5,13 +5,13 @@ from neomodel import (
 from faker import Faker
 import random
 
-from noSQL.models.edge.filipEdges import CultivatesRel, WorshipsRel
-from noSQL.models.nodes.alaNodes import generate_events, generate_users, generate_resources
-from noSQL.models.nodes.filipNodes import generate_cultures, generate_religions, generate_social_groups, generate_pops, \
+from models.edge.filipEdges import CultivatesRel, WorshipsRel
+from models.nodes.alaNodes import generate_events, generate_users, generate_resources
+from models.nodes.filipNodes import generate_cultures, generate_religions, generate_social_groups, generate_pops, \
     generate_localisations
-from noSQL.models.nodes.wojtekNodes import generate_actions, generate_nations
+from models.nodes.wojtekNodes import generate_actions, generate_nations
 
-config.DATABASE_URL = 'bolt://ala:Ala1234!@localhost:7687'
+config.DATABASE_URL = 'bolt://neo4j:admin@localhost:7687'
 
 def generate_data(n):
     fake = Faker()

@@ -4,19 +4,14 @@ from neo4j.graph import Relationship
 from neo4j.time import Duration
 from neomodel import StructuredNode, StringProperty, FloatProperty, IntegerProperty, RelationshipTo, BooleanProperty
 
-from noSQL.models.edge.alaEdges import NumericalModifierRel, PercentModifierRel, AccessToNationRel
-from noSQL.models.edge.wojtekEdges import *
-from noSQL.models.edge.filipEdges import *
-from noSQL.models.nodes.filipNodes import *
+from models.edge.alaEdges import NumericalModifierRel, PercentModifierRel, AccessToNationRel
+from models.edge.wojtekEdges import *
+from models.edge.filipEdges import *
+from models.nodes.filipNodes import *
 
 class Resource(StructuredNode):
     name = StringProperty(required=True, unique_index=True)
     isMain = BooleanProperty(required=True)
-
-#placeholder to test generating
-
-class Nation(StructuredNode):
-    name=StringProperty(required=True, unique_index=True)
 
 class User(StructuredNode):
     name=StringProperty(required=True)
