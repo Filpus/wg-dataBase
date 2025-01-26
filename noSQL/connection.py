@@ -10,6 +10,7 @@ from models.nodes.alaNodes import generate_events, generate_users, generate_reso
 from models.nodes.filipNodes import generate_cultures, generate_religions, generate_social_groups, generate_pops, \
     generate_localisations
 from models.nodes.wojtekNodes import generate_actions, generate_nations
+from noSQL.models.nodes import generate_trade_agreements, generate_armies, generate_unit_types
 
 config.DATABASE_URL = 'bolt://neo4j:admin@localhost:7687'
 
@@ -25,6 +26,9 @@ def generate_data(n):
     users=[]
     nations=[]
     actions=[]
+    unit_types = []
+    armies = []
+    trade_agreements = []
 
     # Generowanie węzłów
     cultures.extend(generate_cultures(n, fake))
@@ -37,6 +41,9 @@ def generate_data(n):
     resources.extend(generate_resources(n, fake))
     nations.extend(generate_nations(n, fake))
     actions.extend(generate_actions(n, fake))
+    unit_types.extend(generate_unit_types(n, fake))
+    armies.extend(generate_armies(n, fake))
+    trade_agreements.extend((generate_trade_agreements(n,fake)))
 
 
     for event in events:
@@ -107,6 +114,12 @@ def generate_data(n):
         nation.save()
     for action in actions:
         action.save()
+    for unit_type in unit_types:
+        unit_type.save()
+    for army in armies:
+        army.save()
+    for trade_agreement in trade_agreements:
+        trade_agreement.save()
 
 if __name__ == "__main__":
     generate_data(5)

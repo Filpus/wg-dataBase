@@ -1,6 +1,6 @@
 from neomodel import StructuredNode, StringProperty, BooleanProperty, RelationshipTo
 import random
-
+from models.edge.rychuEdges import IsReceivingRel
 from models.edge import (
     PerformedByRel,
     WorshipsNationallyRel,
@@ -26,6 +26,7 @@ class Nation(StructuredNode):
     orders = RelationshipTo("UnitType", "ORDERS", model=OrdersRel)
     haveAccessTo = RelationshipTo("UnitType", "HAVEACCESSTO", model=HaveAccessToRel)
     owning = RelationshipTo("Resource", "OWNING", model=OwningRel)
+    isReceiving = RelationshipTo(cls_name="TradeAgreement", relation_type="ISRECEIVING", model=IsReceivingRel)
 
 def generate_actions(n, fake):
     """
