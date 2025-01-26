@@ -37,9 +37,9 @@ from dataGeneration.resourceUsageArrays.usedResourcesGenerator import generateUs
 # Connect to PostgreSQL database
 connection = psycopg2.connect(
     host="localhost",
-    database="wg-po",
+    database="wg",
     user="postgres",
-    password="Filip1234"
+    password="admin"
 )
 cursor = connection.cursor()
 
@@ -80,15 +80,15 @@ wantedresources_query = '''INSERT INTO wantedresources ( fk_resources,fk_tradeag
 
 
 queryList= [
-    #cultures_query,
-    #religions_query,
-    # #nations_query,
-    # resources_query,
-    # locations_query,
-    # socialgroups_query,
-    # users_query,
+    ##cultures_query,
+    ##religions_query,
+    ## nations_query,
+    ## resources_query,
+    ## locations_query,
+    ## socialgroups_query,
+    ## users_query,
     # unittypes_query,
-    # accessestonations_query,
+    ## accessestonations_query,
     # accessestounits_query,
     # actions_query,
     # armies_query,
@@ -100,8 +100,8 @@ queryList= [
     # modifiers_query,
     # tradeagreements_query,
     # offeredresources_query,
-    ownedresources_query,
-    # populations_query,
+    ##ownedresources_query,
+     populations_query,
     # productioncosts_query,
     # productionshares_query,
     # relatedevents_query,
@@ -112,15 +112,15 @@ queryList= [
 ]
 
 functionsList = [
-    #generateCulture,          # cultures_query
-    #generateReligions,        # religion_query
-    #generateNations,          # nations_query
-    # generateResources,        # resources_query
-    # generateLocations,        # locations_query
-    # generateSocialGroups,      # socialgroups_query
-    # generateUsers,            # users_query
+    ##generateCulture,          # cultures_query
+    ##generateReligions,        # religion_query
+    ##generateNations,          # nations_query
+    ##generateResources,        # resources_query
+    ##generateLocations,        # locations_query
+    ##generateSocialGroups,      # socialgroups_query
+    ##generateUsers,            # users_query
     # generateUnitTypes,        # unittypes_query
-    # generateNationAccess,     # accessestonations_query
+    ##generateNationAccess,     # accessestonations_query
     # generateUnitAccess,       # accessestounits_query
     # generateActions,           # actions_query
     # generateArmies,             # armies_query
@@ -132,8 +132,8 @@ functionsList = [
     # generateModifiers,        # modifiers_query
     # generateTrade,            # tradeagreements_query
     # generateTradeOffer,       # offeredresources_query
-    generateOwnerships,       # ownedresources_query
-    # generatePops,             # populations_query
+    ##generateOwnerships,       # ownedresources_query
+     generatePops,             # populations_query
     # generateProductionCost,   # productioncosts_query
     # generateProductionShare,  # productionshares_query
     # generateRelatedEvents,    # relatedevents_query
