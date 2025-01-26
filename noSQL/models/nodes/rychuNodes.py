@@ -1,5 +1,5 @@
 import random
-from models.edge.rychuEdges import *
+from noSQL.models.edge.rychuEdges import *
 from neomodel import StructuredNode, StringProperty, IntegerProperty, RelationshipTo, BooleanProperty
 from noSQL.models.edge import AvailableTroopsRel, CostToMaintainRel, CostToProduceRel, WantsResourcesRel, \
     OffersResourcesRel, BelongsToRel, StayingAtRel, IsOfferingRel

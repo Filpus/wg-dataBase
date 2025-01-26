@@ -1,7 +1,7 @@
 from neomodel import StructuredNode, StringProperty, BooleanProperty, RelationshipTo
 import random
-from models.edge.rychuEdges import IsReceivingRel
-from models.edge import (
+from noSQL.models.edge.rychuEdges import IsReceivingRel
+from noSQL.models.edge import (
     PerformedByRel,
     WorshipsNationallyRel,
     CultivatesNationallyRel,
