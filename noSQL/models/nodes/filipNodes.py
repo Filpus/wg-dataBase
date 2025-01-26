@@ -3,7 +3,7 @@ import random
 from neo4j.graph import Relationship
 from neomodel import StructuredNode, StringProperty, FloatProperty, IntegerProperty, RelationshipTo
 
-from noSQL.models.edge.filipEdges import *
+from models.edge.filipEdges import *
 
 class Culture(StructuredNode):
     name = StringProperty(required=True, unique_index=True)

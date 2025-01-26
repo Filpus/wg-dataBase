@@ -1,9 +1,8 @@
 from neomodel import StructuredNode, StringProperty, BooleanProperty, RelationshipTo
 import random
 
-from noSQL.models.edge import (
+from models.edge import (
     PerformedByRel,
-    OwnedByRel,
     WorshipsNationallyRel,
     CultivatesNationallyRel,
     OrdersRel,
