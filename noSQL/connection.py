@@ -6,10 +6,11 @@ from faker import Faker
 import random
 
 from noSQL.models.edge.filipEdges import CultivatesRel, WorshipsRel
+from noSQL.models.nodes.alaNodes import generate_events, generate_users, generate_resources
 from noSQL.models.nodes.filipNodes import generate_cultures, generate_religions, generate_social_groups, generate_pops, \
     generate_localisations
 
-config.DATABASE_URL = 'bolt://test:Filip1234@localhost:7687'
+config.DATABASE_URL = 'bolt://ala:Ala1234!@localhost:7687'
 
 def generate_data(n):
     fake = Faker()
@@ -18,6 +19,9 @@ def generate_data(n):
     socialGroups = []
     localisations = []
     populations = []
+    events=[]
+    resources=[]
+    users=[]
 
     # Generowanie węzłów
     cultures.extend(generate_cultures(n, fake))
@@ -25,6 +29,42 @@ def generate_data(n):
     socialGroups.extend(generate_social_groups(n, fake))
     populations.extend(generate_pops(n))
     localisations.extend(generate_localisations(n, fake))
+    events.extend(generate_events(n, fake))
+    users.extend(generate_users(n, fake))
+    resources.extend(generate_resources(n, fake))
+
+
+    for event in events:
+        n=random.randint(0,4)
+        for i in range(n):
+            type=random.randint(1,4)
+            isNum=bool(random.randint(0,1))
+            match type:
+                case 1:
+                    group=random.choice(socialGroups)
+                    if(isNum):
+                        event.groupNumModifies.connect(group,{"value": random.randint(1, 100)})
+                    else:
+                        event.groupPercModifies.connect(group,{"value": random.randint(1, 100)})
+                case 2:
+                    culture=random.choice(cultures)
+                    if(isNum):
+                        event.cultureNumModifies.connect(culture,{"value": random.randint(1, 100)})
+                    else:
+                        event.culturePercModifies.connect(culture,{"value": random.randint(1, 100)})
+                case 3:
+                    religion=random.choice(religions)
+                    if(isNum):
+                        event.religionNumModifies.connect(religion,{"value": random.randint(1, 100)})
+                    else:
+                        event.religionPercModifies.connect(religion,{"value": random.randint(1, 100)})
+                case 4:
+                    resource=random.choice(resources)
+                    if(isNum):
+                        event.resourceNumModifies.connect(resource,{"value": random.randint(1, 100)})
+                    else:
+                        event.resourcePercModifies.connect(resource,{"value": random.randint(1, 100)})
+
 
     for pop in populations:
         culture = random.choice(cultures)
@@ -52,6 +92,12 @@ def generate_data(n):
         localisation.save()
     for population in populations:
         population.save()
+    for user in users:
+        user.save()
+    for event in events:
+        event.save()
+    for resource in resources:
+        resource.save()
 
 if __name__ == "__main__":
     generate_data(5)

@@ -5,9 +5,6 @@ from neomodel import StructuredNode, StringProperty, FloatProperty, IntegerPrope
 
 from noSQL.models.edge.filipEdges import *
 
-
-class Resource(StructuredNode):
-    name = StringProperty(required=True, unique_index=True)
 class Culture(StructuredNode):
     name = StringProperty(required=True, unique_index=True)
 
