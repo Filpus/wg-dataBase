@@ -9,6 +9,7 @@ from noSQL.models.edge.filipEdges import CultivatesRel, WorshipsRel
 from noSQL.models.nodes.alaNodes import generate_events, generate_users, generate_resources
 from noSQL.models.nodes.filipNodes import generate_cultures, generate_religions, generate_social_groups, generate_pops, \
     generate_localisations
+from noSQL.models.nodes.wojtekNodes import generate_actions, generate_nations
 
 config.DATABASE_URL = 'bolt://ala:Ala1234!@localhost:7687'
 
@@ -22,6 +23,8 @@ def generate_data(n):
     events=[]
     resources=[]
     users=[]
+    nations=[]
+    actions=[]
 
     # Generowanie węzłów
     cultures.extend(generate_cultures(n, fake))
@@ -32,6 +35,8 @@ def generate_data(n):
     events.extend(generate_events(n, fake))
     users.extend(generate_users(n, fake))
     resources.extend(generate_resources(n, fake))
+    nations.extend(generate_nations(n, fake))
+    actions.extend(generate_actions(n, fake))
 
 
     for event in events:
@@ -98,6 +103,10 @@ def generate_data(n):
         event.save()
     for resource in resources:
         resource.save()
+    for nation in nations:
+        nation.save()
+    for action in actions:
+        action.save()
 
 if __name__ == "__main__":
     generate_data(5)

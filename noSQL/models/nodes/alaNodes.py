@@ -5,6 +5,7 @@ from neo4j.time import Duration
 from neomodel import StructuredNode, StringProperty, FloatProperty, IntegerProperty, RelationshipTo, BooleanProperty
 
 from noSQL.models.edge.alaEdges import NumericalModifierRel, PercentModifierRel, AccessToNationRel
+from noSQL.models.edge.wojtekEdges import *
 from noSQL.models.edge.filipEdges import *
 from noSQL.models.nodes.filipNodes import *
 
@@ -40,6 +41,8 @@ class Event(StructuredNode):
 
     resourceNumModifies = RelationshipTo("Resource", "MODIFIESBYNUM", model= NumericalModifierRel)
     resourcePercModifies = RelationshipTo("Resource", "MODIFIESBYPERC", model= PercentModifierRel)
+
+    happensIn = RelationshipTo("Nation", "HAPPENSIN", model= HappensInRel)
 
 
 
