@@ -102,7 +102,7 @@ def generate_data(n):
         nation.cultivatesNationally.connect(culture)
 
         resource = random.choice(resources)
-        nation.owning.connect(resource, {"count": random.randint(10, 100)})
+        nation.owning.connect(resource, {"amount": random.randint(10, 100)})
 
         num_actions = random.randint(1, 3)
         for _ in range(num_actions):
@@ -125,6 +125,12 @@ def generate_data(n):
         nation = random.choice(nations)
         localisation.placeIn.connect(nation)
 
+    for army in armies:
+        nation = random.choice(nations)
+        army.belongsTo.connect(nation)
+        for i in range(random.randint(1, 15)):
+            troop = random.choice(unit_types)
+            army.availableTroops.connect(troop,{"quantity": troop.volunteersNeeded})
     for culture in cultures:
         culture.save()
     for religion in religions:
