@@ -102,7 +102,7 @@ def generate_data(n):
         nation.cultivatesNationally.connect(culture)
 
         resource = random.choice(resources)
-        nation.owning.connect(resource, {"amount": random.randint(10, 100)})
+        nation.owning.connect(resource, {"count": random.randint(10, 100)})
 
         num_actions = random.randint(1, 3)
         for _ in range(num_actions):
@@ -121,6 +121,9 @@ def generate_data(n):
                     "dateAcquired": fake.date_time_this_year()
                 }
             )
+    for localisation in localisations:
+        nation = random.choice(nations)
+        localisation.placeIn.connect(nation)
 
     for culture in cultures:
         culture.save()
