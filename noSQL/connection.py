@@ -8,7 +8,7 @@ import random
 from models.edges import *
 from models.nodes import *
 
-config.DATABASE_URL = 'bolt://test:Filip1234@localhost:7687'
+config.DATABASE_URL = 'bolt://neo4j:abcdefgh@localhost:7687'
 
 def generate_data(n):
     fake = Faker()
@@ -25,6 +25,7 @@ def generate_data(n):
     unit_types = []
     armies = []
     trade_agreements = []
+    nation_localisations = {}
 
     # Generowanie węzłów
     cultures.extend(generate_cultures(n, fake))
@@ -72,12 +73,20 @@ def generate_data(n):
                         event.resourceNumModifies.connect(resource,{"value": random.randint(1, 100)})
                     else:
                         event.resourcePercModifies.connect(resource,{"value": random.randint(1, 100)})
+
+
+    for nation in nations:
+        evs=random.choices(events)
+        for e in evs:
+            nation.takesPartInEvent.connect(e, {})
+
     for socialGroup in socialGroups:
 
         resource = random.choice(resources)
         socialGroup.consume.connect(resource,{"count": random.randint(1, 5)})
         resource = random.choice(resources)
         socialGroup.produce.connect(resource,{"effectiveness": random.randint(1, 10)})
+
     for pop in populations:
         culture = random.choice(cultures)
         pop.cultivates.connect(culture,{"sentiment_level": random.randint(1, 10)})
@@ -122,6 +131,34 @@ def generate_data(n):
                 }
             )
 
+    for localisation in localisations:
+        nation = random.choice(nations)
+        localisation.placeIn.connect(nation)
+
+        nation_name = nation.name
+        if nation_name not in nation_localisations:
+            nation_localisations[nation_name] = []
+        nation_localisations[nation_name].append(localisation)
+
+    for army in armies:
+        nation = random.choice(nations)
+        army.belongsTo.connect(nation)
+        
+        nation_name = nation.name
+        if nation_name in nation_localisations and nation_localisations[nation_name]:
+            loc = random.choice(nation_localisations[nation_name])
+            army.stayingAt.connect(loc)
+
+        for i in range(random.randint(1, 15)):
+            troop = random.choice(unit_types)
+            army.availableTroops.connect(troop, {"quantity": troop.volunteersNeeded})
+
+    for unit in unit_types:
+        resource_cost=random.choices(resources)
+        for res in resource_cost:
+            unit.costToMaintain.connect(res, {"quantity": random.randint(0,10)})
+
+
     for culture in cultures:
         culture.save()
     for religion in religions:
@@ -149,5 +186,6 @@ def generate_data(n):
     for trade_agreement in trade_agreements:
         trade_agreement.save()
 
+
 if __name__ == "__main__":
-    generate_data(5)
+    generate_data(20)
