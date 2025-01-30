@@ -56,6 +56,9 @@ class OffersResourcesRel(StructuredRel):
 class LeadsRel(StructuredRel):
     pass
 
+class TakesPartRel(StructuredRel):
+    pass
+
 class StayingAtRel(StructuredRel):
     pass
 

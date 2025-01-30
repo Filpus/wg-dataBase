@@ -8,7 +8,7 @@ import random
 from models.edges import *
 from models.nodes import *
 
-config.DATABASE_URL = 'bolt://test:Filip1234@localhost:7687'
+config.DATABASE_URL = 'bolt://ala:Vanitas1234!@localhost:7687'
 
 def generate_data(n):
     fake = Faker()
