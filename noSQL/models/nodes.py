@@ -85,6 +85,8 @@ class SocialGroup(StructuredNode):
     name = StringProperty(required=True, unique_index=True)
     base_satisfaction = FloatProperty(required=True)
     volunteers = IntegerProperty()
+    produce = RelationshipTo("Resource","PRODUCE", model=ProducesRel)
+    consume = RelationshipTo("Resource","CONSUME", model=ConsumesRel)
 
 class Pop(StructuredNode):
     satisfaction = FloatProperty(required=True)

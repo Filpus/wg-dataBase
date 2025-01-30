@@ -8,7 +8,7 @@ import random
 from models.edges import *
 from models.nodes import *
 
-config.DATABASE_URL = 'bolt://neo4j:abcdefgh@localhost:7687'
+config.DATABASE_URL = 'bolt://test:Filip1234@localhost:7687'
 
 def generate_data(n):
     fake = Faker()
@@ -72,8 +72,12 @@ def generate_data(n):
                         event.resourceNumModifies.connect(resource,{"value": random.randint(1, 100)})
                     else:
                         event.resourcePercModifies.connect(resource,{"value": random.randint(1, 100)})
+    for socialGroup in socialGroups:
 
-
+        resource = random.choice(resources)
+        socialGroup.consume.connect(resource,{"count": random.randint(1, 5)})
+        resource = random.choice(resources)
+        socialGroup.produce.connect(resource,{"effectiveness": random.randint(1, 10)})
     for pop in populations:
         culture = random.choice(cultures)
         pop.cultivates.connect(culture,{"sentiment_level": random.randint(1, 10)})
