@@ -164,7 +164,7 @@ class Army(StructuredNode):
     name = StringProperty(required=True, unique_index=True)
     availableTroops = RelationshipTo(cls_name="UnitType", relation_type="AVAILABLETROOPS", model=AvailableTroopsRel)
     belongsTo = RelationshipTo(cls_name="Nation", relation_type="BELONGSTO", model=BelongsToRel)
-    stayingAt = RelationshipTo("Localisation", "STAYING_AT", model=StayingAtRel)
+    stayingAt = RelationshipTo("Localisation", "STAYINGAT", model=StayingAtRel)
 
 
 def generate_armies(n, fake):
@@ -218,7 +218,7 @@ class Nation(StructuredNode):
     haveAccessTo = RelationshipTo("UnitType", "HAVEACCESSTO", model=HaveAccessToRel)
     owning = RelationshipTo("Resource", "OWNING", model=OwningRel)
     isReceiving = RelationshipTo(cls_name="TradeAgreement", relation_type="ISRECEIVING", model=IsReceivingRel)
-    locations = RelationshipTo("Localisation", "BELONGS_TO")
+    locations = RelationshipTo("Localisation", "BELONGSTO")
 
 def generate_actions(n, fake):
     """
