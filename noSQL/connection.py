@@ -72,6 +72,13 @@ def generate_data(n):
                         event.resourceNumModifies.connect(resource,{"value": random.randint(1, 100)})
                     else:
                         event.resourcePercModifies.connect(resource,{"value": random.randint(1, 100)})
+
+
+    for nation in nations:
+        evs=random.choices(events)
+        for e in evs:
+            nation.takesPartInEvent.connect(e, {})
+
     for socialGroup in socialGroups:
 
         resource = random.choice(resources)
@@ -148,6 +155,7 @@ def generate_data(n):
         army.save()
     for trade_agreement in trade_agreements:
         trade_agreement.save()
+
 
 if __name__ == "__main__":
     generate_data(5)

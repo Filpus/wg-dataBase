@@ -18,13 +18,14 @@ ORDER BY a.name
 
 
 all_nation_resource_modifiers="""
-MATCH (n:Nation)-[:HAPPENSIN]->(e:Event)-[:MODIFIESBYNUM]->(r:Resource)
+MATCH (n:Nation)-[:TAKESPART]->(e:Event)-[:MODIFIESBYNUM]->(r:Resource)
 WHERE n.name = $nation_name
-RETURN r.name AS Resource, collect(e.name) AS Events, collect(r.value) AS NumericModifiers
+RETURN r.name AS Resource, collect(e.name) AS Events, collect(r.value) AS Modifiers, 'Numeric' AS ModifierType
 
 UNION
 
-MATCH (n:Nation)-[:HAPPENSIN]->(e:Event)-[:MODIFIESBYPERC]->(r:Resource)
+MATCH (n:Nation)-[:TAKESPART]->(e:Event)-[:MODIFIESBYPERC]->(r:Resource)
 WHERE n.name = $nation_name
-RETURN r.name AS Resource, collect(e.name) AS Events, collect(r.value) AS PercentModifiers
+RETURN r.name AS Resource, collect(e.name) AS Events, collect(r.value) AS Modifiers, 'Percent' AS ModifierType
+
 """

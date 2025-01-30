@@ -218,7 +218,7 @@ class Nation(StructuredNode):
     owning = RelationshipTo("Resource", "OWNING", model=OwningRel)
     isReceiving = RelationshipTo(cls_name="TradeAgreement", relation_type="ISRECEIVING", model=IsReceivingRel)
     leads = RelationshipTo(cls_name="Army", relation_type="LEADS", model=LeadsRel)
-    takesPartInEvents = RelationshipTo(cls_name="Event", relation_type="TAKESPART", model=TakesPartRel)
+    takesPartInEvent = RelationshipTo(cls_name="Event", relation_type="TAKESPART", model=TakesPartRel)
 
 def generate_actions(n, fake):
     """
