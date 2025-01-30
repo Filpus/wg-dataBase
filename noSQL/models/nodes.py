@@ -164,7 +164,7 @@ class Army(StructuredNode):
     name = StringProperty(required=True, unique_index=True)
     availableTroops = RelationshipTo(cls_name="UnitType", relation_type="AVAILABLETROOPS", model=AvailableTroopsRel)
     belongsTo = RelationshipTo(cls_name="Nation", relation_type="BELONGSTO", model=BelongsToRel)
-    stayingAt = RelationshipTo(cls_name="Army", relation_type="STAYINGAT", model=StayingAtRel)
+    stayingAt = RelationshipTo("Localisation", "STAYING_AT", model=StayingAtRel)
 
 
 def generate_armies(n, fake):
