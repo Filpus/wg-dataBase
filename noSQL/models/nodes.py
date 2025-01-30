@@ -218,6 +218,7 @@ class Nation(StructuredNode):
     haveAccessTo = RelationshipTo("UnitType", "HAVEACCESSTO", model=HaveAccessToRel)
     owning = RelationshipTo("Resource", "OWNING", model=OwningRel)
     isReceiving = RelationshipTo(cls_name="TradeAgreement", relation_type="ISRECEIVING", model=IsReceivingRel)
+    locations = RelationshipTo("Localisation", "BELONGS_TO")
 
 def generate_actions(n, fake):
     """
