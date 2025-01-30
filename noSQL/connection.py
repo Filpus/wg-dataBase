@@ -128,7 +128,16 @@ def generate_data(n):
                     "dateAcquired": fake.date_time_this_year()
                 }
             )
+    for localisation in localisations:
+        nation = random.choice(nations)
+        localisation.placeIn.connect(nation)
 
+    for army in armies:
+        nation = random.choice(nations)
+        army.belongsTo.connect(nation)
+        for i in range(random.randint(1, 15)):
+            troop = random.choice(unit_types)
+            army.availableTroops.connect(troop,{"quantity": troop.volunteersNeeded})
     for culture in cultures:
         culture.save()
     for religion in religions:

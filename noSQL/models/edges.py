@@ -36,6 +36,8 @@ class ConsumesRel(StructuredRel):
 class ResidesRel(StructuredRel):
     pass
 
+class placeIn(StructuredRel):
+    pass
 # Rychu
 
 class AvailableTroopsRel(StructuredRel):

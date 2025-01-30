@@ -99,6 +99,7 @@ class Localisation(StructuredNode):
     name = StringProperty(required=True)
     size = IntegerProperty(required=True)
     fortifications_level = IntegerProperty()
+    placeIn = RelationshipTo("Nation", "PLACEIN", model=placeIn)
 
 def generate_cultures(n, fake):
     nodes = []
