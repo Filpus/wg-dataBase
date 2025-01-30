@@ -55,7 +55,7 @@ class WantsResourcesRel(StructuredRel):
 class OffersResourcesRel(StructuredRel):
     quantity = IntegerProperty(required=True)
 
-class LeadsRel(StructuredRel):
+class BelongsToRel(StructuredRel):
     pass
 
 class TakesPartRel(StructuredRel):

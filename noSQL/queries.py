@@ -29,3 +29,6 @@ WHERE n.name = $nation_name
 RETURN r.name AS Resource, collect(e.name) AS Events, collect(r.value) AS Modifiers, 'Percent' AS ModifierType
 
 """
+whole_maintenance_cost_for_nation="""MATCH (n:Nation {name: $nation_name})<-[:BELONGSTO]-(a:Army)-[:AVAILABLETROOPS]->(u:UnitType)-[c:COSTTOMAINTAIN]->(r:Resource)
+RETURN r.name AS ResourceName ,SUM(c.quantity) AS TotalSalary"""
+

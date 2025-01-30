@@ -138,6 +138,13 @@ def generate_data(n):
         for i in range(random.randint(1, 15)):
             troop = random.choice(unit_types)
             army.availableTroops.connect(troop,{"quantity": troop.volunteersNeeded})
+
+    for unit in unit_types:
+        resource_cost=random.choices(resources)
+        for res in resource_cost:
+            unit.costToMaintain.connect(res, {"quantity": random.randint(0,10)})
+
+
     for culture in cultures:
         culture.save()
     for religion in religions:
@@ -167,4 +174,4 @@ def generate_data(n):
 
 
 if __name__ == "__main__":
-    generate_data(5)
+    generate_data(20)
