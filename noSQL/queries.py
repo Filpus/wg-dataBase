@@ -32,3 +32,24 @@ RETURN r.name AS Resource, collect(e.name) AS Events, collect(r.value) AS Modifi
 whole_maintenance_cost_for_nation="""MATCH (n:Nation {name: $nation_name})<-[:BELONGSTO]-(a:Army)-[:AVAILABLETROOPS]->(u:UnitType)-[c:COSTTOMAINTAIN]->(r:Resource)
 RETURN r.name AS ResourceName ,SUM(c.quantity) AS TotalSalary"""
 
+
+# Query 1: The amount of each resource a nation has
+resources_of_nation = """
+MATCH (n:Nation {name: 'Spain'})-[r:OWNING]->(res:Resource)
+RETURN n.name AS nation_name, res.name AS resource_name, r.amount AS resource_amount
+"""
+
+# Query 5: Pops number of a country
+pops_of_country =""" 
+MATCH (n:Nation)<-[:PLACEIN]-(loc:Localisation)<-[:RESIDES]-(pop:Pop)
+RETURN n.name, COUNT(pop)"""
+
+# Query 7: Number of volunteers in a country
+volunteers_of_country = """
+MATCH (n:Nation)<-[:PLACEIN]-(loc:Localisation)<-[:RESIDES]-(pop:Pop)-[:ISPARTOF]->(sg:SocialGroup)
+RETURN n.name, SUM(sg.volunteers)"""
+
+# Query 10: Localization of armies within a country
+armies_localization_in_country ="""
+MATCH (n:Nation)<-[:BELONGSTO]-(army:Army)-[:STAYINGAT]->(loc:Localisation)
+RETURN n.name, army.name, loc.name"""
