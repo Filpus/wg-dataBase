@@ -99,6 +99,7 @@ class Localisation(StructuredNode):
     name = StringProperty(required=True)
     size = IntegerProperty(required=True)
     fortifications_level = IntegerProperty()
+    placeIn = RelationshipTo("Nation", "PLACEIN", model=placeIn)
 
 def generate_cultures(n, fake):
     nodes = []
@@ -163,9 +164,9 @@ class UnitType(StructuredNode):
 class Army(StructuredNode):
     name = StringProperty(required=True, unique_index=True)
     availableTroops = RelationshipTo(cls_name="UnitType", relation_type="AVAILABLETROOPS", model=AvailableTroopsRel)
+    stayingAt = RelationshipTo(cls_name="Localisation", relation_type="STAYINGAT", model=StayingAtRel)
     belongsTo = RelationshipTo(cls_name="Nation", relation_type="BELONGSTO", model=BelongsToRel)
     stayingAt = RelationshipTo("Localisation", "STAYINGAT", model=StayingAtRel)
-
 
 def generate_armies(n, fake):
     armies = []
@@ -219,6 +220,8 @@ class Nation(StructuredNode):
     owning = RelationshipTo("Resource", "OWNING", model=OwningRel)
     isReceiving = RelationshipTo(cls_name="TradeAgreement", relation_type="ISRECEIVING", model=IsReceivingRel)
     locations = RelationshipTo("Localisation", "BELONGSTO")
+    takesPartInEvent = RelationshipTo(cls_name="Event", relation_type="TAKESPART", model=TakesPartRel)
+
 
 def generate_actions(n, fake):
     """

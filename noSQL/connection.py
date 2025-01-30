@@ -8,7 +8,7 @@ import random
 from models.edges import *
 from models.nodes import *
 
-config.DATABASE_URL = 'bolt://test:Filip1234@localhost:7687'
+config.DATABASE_URL = 'bolt://ala:Vanitas1234!@localhost:7687'
 
 def generate_data(n):
     fake = Faker()
@@ -72,6 +72,13 @@ def generate_data(n):
                         event.resourceNumModifies.connect(resource,{"value": random.randint(1, 100)})
                     else:
                         event.resourcePercModifies.connect(resource,{"value": random.randint(1, 100)})
+
+
+    for nation in nations:
+        evs=random.choices(events)
+        for e in evs:
+            nation.takesPartInEvent.connect(e, {})
+
     for socialGroup in socialGroups:
 
         resource = random.choice(resources)
@@ -121,6 +128,22 @@ def generate_data(n):
                     "dateAcquired": fake.date_time_this_year()
                 }
             )
+    for localisation in localisations:
+        nation = random.choice(nations)
+        localisation.placeIn.connect(nation)
+
+    for army in armies:
+        nation = random.choice(nations)
+        army.belongsTo.connect(nation)
+        for i in range(random.randint(1, 15)):
+            troop = random.choice(unit_types)
+            army.availableTroops.connect(troop,{"quantity": troop.volunteersNeeded})
+
+    for unit in unit_types:
+        resource_cost=random.choices(resources)
+        for res in resource_cost:
+            unit.costToMaintain.connect(res, {"quantity": random.randint(0,10)})
+
 
     for culture in cultures:
         culture.save()
@@ -149,5 +172,6 @@ def generate_data(n):
     for trade_agreement in trade_agreements:
         trade_agreement.save()
 
+
 if __name__ == "__main__":
-    generate_data(5)
+    generate_data(20)

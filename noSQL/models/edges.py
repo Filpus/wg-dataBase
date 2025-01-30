@@ -36,6 +36,8 @@ class ConsumesRel(StructuredRel):
 class ResidesRel(StructuredRel):
     pass
 
+class placeIn(StructuredRel):
+    pass
 # Rychu
 
 class AvailableTroopsRel(StructuredRel):
@@ -54,6 +56,9 @@ class OffersResourcesRel(StructuredRel):
     quantity = IntegerProperty(required=True)
 
 class BelongsToRel(StructuredRel):
+    pass
+
+class TakesPartRel(StructuredRel):
     pass
 
 class StayingAtRel(StructuredRel):
